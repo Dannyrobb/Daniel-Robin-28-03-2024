@@ -1,15 +1,22 @@
 import React from "react";
-import { Provider } from "react-redux";
-import WeatherPage from "./components/WeatherPage";
-import store from "./state/store";
-
+import WeatherPage from "./pages/WeatherPage";
+import { Routes, Route } from "react-router-dom";
+import CustomAppBar from "./components/AppBar";
+import FavoritesPage from "./pages/FavoritesPage";
+import { useCustomTheme } from "./assets/theme";
+import { ThemeProvider } from "@emotion/react";
 const App: React.FC = () => {
+  const theme = useCustomTheme();
   return (
-    <Provider store={store}>
+    <ThemeProvider theme={theme}>
       <div className="App">
-        <WeatherPage />
+        <CustomAppBar />
+        <Routes>
+          <Route path="/" element={<WeatherPage />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
+        </Routes>
       </div>
-    </Provider>
+    </ThemeProvider>
   );
 };
 

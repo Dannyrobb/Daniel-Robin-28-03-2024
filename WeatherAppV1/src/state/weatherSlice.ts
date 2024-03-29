@@ -24,10 +24,13 @@ interface WeatherData {
   };
   MobileLink: string;
   Link: string;
+  city: string;
+  country: string;
+  key: string;
 }
 
 interface WeatherState {
-  data: WeatherData[] | null;
+  data: WeatherData | null;
   loading: boolean;
   error: string | null;
 }
@@ -46,7 +49,7 @@ const weatherSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    fetchWeatherSuccess: (state, action: PayloadAction<WeatherData[]>) => {
+    fetchWeatherSuccess: (state, action: PayloadAction<WeatherData>) => {
       state.loading = false;
       state.data = action.payload;
     },
@@ -60,13 +63,14 @@ const weatherSlice = createSlice({
 export const { fetchWeatherStart, fetchWeatherSuccess, fetchWeatherFailure } = weatherSlice.actions;
 
 export const fetchWeather =
-  (key: string): AppThunk =>
+  (locationKey: string, locationCity: string, locationCountry: string): AppThunk =>
   async (dispatch) => {
     dispatch(fetchWeatherStart());
     try {
       // Here you would make an API call to fetch weather data based on the query
       // For simplicity, let's just assume we get some mock data
-      const data = await fetchCurrentWeather(key);
+      const data = await fetchCurrentWeather(locationKey, locationCity, locationCountry);
+
       console.log(data);
       dispatch(fetchWeatherSuccess(data));
     } catch (error) {

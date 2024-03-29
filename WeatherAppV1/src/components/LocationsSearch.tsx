@@ -25,18 +25,28 @@ const LocationsSearch: React.FC = () => {
     setInputValue(e.target.value);
   };
 
-  const handleSelectChange = (event: React.ChangeEvent<{}>, value: { label: string; value: string; key: string } | null) => {
+  const handleSelectChange = (
+    event: React.ChangeEvent<{}>,
+    value: { label: string; value: string; key: string; country: string } | null
+  ) => {
     if (value) {
       console.log("Selected Location Key:", value.value);
       console.log("Selected Location Label:", value.label);
-      dispatch(fetchWeather(value.value));
+      console.log(value.country);
+      console.log(value);
+      dispatch(fetchWeather(value.key, value.label, value.country));
     }
   };
   return (
     <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={locationsList.map((location) => ({ label: location.LocalizedName, value: location.Key, key: location.Key }))}
+      options={locationsList.map((location) => ({
+        label: location.LocalizedName,
+        value: location.Key,
+        key: location.Key,
+        country: location.Country.LocalizedName,
+      }))}
       sx={{ width: 300 }}
       onChange={handleSelectChange}
       onInputChange={(e) => handleInputChange(e)}

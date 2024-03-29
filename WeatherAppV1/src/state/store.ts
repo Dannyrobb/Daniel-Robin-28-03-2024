@@ -3,12 +3,14 @@ import weatherReducer from "./weatherSlice";
 import themeReducer from "./themeSlice";
 import locationSlice from "./locationSlice";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+import favortiesSlice from "./favortiesSlice";
 
 const store = configureStore({
   reducer: {
     weather: weatherReducer,
     theme: themeReducer,
     location: locationSlice,
+    favorites: favortiesSlice,
   },
 });
 
