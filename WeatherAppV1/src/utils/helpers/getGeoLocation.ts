@@ -3,7 +3,7 @@ import { fetchWeather } from "../../state/weatherSlice";
 export const getGeoLocation = (): Promise<{ cityName: string; countryName: string; key: string }> => {
   return new Promise((resolve, reject) => {
     const successCallback = (position: GeolocationPosition) => {
-      getGeoPosition(position.coords.longitude, position.coords.latitude).then((data) => {
+      getGeoPosition(position.coords.latitude, position.coords.longitude).then((data) => {
         resolve(data);
       });
     };
@@ -23,12 +23,12 @@ export function handleGeolocationPermission(dispatch) {
       .then((data) => dispatch(fetchWeather(data.key, data.cityName, data.countryName)))
       .catch((e) => {
         console.log(e);
-        // If there's an error getting geolocation, fetch default weather
+
         dispatch(fetchWeather("215854", "Tel Aviv", "Israel"));
       });
   } else if (geolocationPermissionGranted === "false") {
     dispatch(fetchWeather("215854", "Tel Aviv", "Israel"));
-    return Promise.resolve(); // Return a resolved promise if user denies permission
+    return Promise.resolve();
   } else {
     const userAnswer = confirm("May we use your geolocation for default location based weather?");
     if (userAnswer) {

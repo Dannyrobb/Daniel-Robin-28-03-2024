@@ -21,13 +21,13 @@ const WeatherPage: React.FC = () => {
   return (
     <Container sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
       <LocationsSearch />
-      <button
+      {/* <button
         onClick={() => {
           handleGeolocationPermission(dispatch);
         }}
       >
         My Location
-      </button>
+      </button> */}
 
       {weather.loading && <CircularProgress color="primary" />}
       {weather.error && <Typography variant="body1">Error: {weather.error}</Typography>}
