@@ -1,7 +1,8 @@
 import React from "react";
-import { Card, CardContent, Typography, Box, Grid, Avatar } from "@mui/material";
+import { Typography, Box, Grid } from "@mui/material";
 import FavoriteStar from "../partials/FavoriteStar";
 import { getCurrentDate } from "../utils/helpers/getCurrentDate";
+
 interface Temperature {
   Metric: {
     Value: number;
@@ -23,9 +24,9 @@ interface WeatherCardProps {
   WeatherText: string;
   fiveDayForecast: any;
 }
-
 const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperature, fiveDayForecast, WeatherIcon, WeatherText }) => {
   console.log(Key);
+
   //   const { city country, temperature, fiveDayForecast } = weatherData;
   return (
     <Grid
@@ -75,7 +76,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperatu
           }}
         >
           <Typography variant="h1" sx={{ fontFamily: "monospace" }}>
-            {`${temperature.Metric.Value}°`}{" "}
+            {`${temperature.Metric.Value}°`}
           </Typography>
           <Typography
             sx={{ fontFamily: "monospace" }}
@@ -93,11 +94,12 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperatu
             margin: { xs: "10px" },
             borderTop: "2px solid",
             padding: "20px",
+            flexWrap: "wrap",
           }}
         >
           {fiveDayForecast.map((day) => {
             return (
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
+              <Box sx={{ display: "flex", flexDirection: "column", margin: "4px", borderRadius: "4px" }}>
                 <Typography sx={{ fontFamily: "monospace" }} variant="body2">
                   {day.dayOfWeek}
                 </Typography>
