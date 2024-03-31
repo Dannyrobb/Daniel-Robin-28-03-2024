@@ -14,7 +14,6 @@ export const FavoritesWeatherCard = ({ favorite }: { favorite: any }) => {
   };
 
   return (
-    // item xs={10} sm={6} md={4} lg={4}
     <Grid item xs={12} md={6} lg={4}>
       <Paper
         elevation={3}

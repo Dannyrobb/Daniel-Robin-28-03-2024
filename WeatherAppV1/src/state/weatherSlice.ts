@@ -68,8 +68,6 @@ export const fetchWeather =
   async (dispatch) => {
     dispatch(fetchWeatherStart());
     try {
-      // Here you would make an API call to fetch weather data based on the query
-      // For simplicity, let's just assume we get some mock data
       const data = await fetchCurrentWeather(locationKey, locationCity, locationCountry);
 
       console.log(data);
