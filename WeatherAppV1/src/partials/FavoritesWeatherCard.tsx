@@ -3,11 +3,13 @@ import { fetchWeather } from "../state/weatherSlice";
 import { useNavigate } from "react-router-dom";
 import { Grid, Typography, Paper, CircularProgress, Box } from "@mui/material";
 import FavoriteStar from "./FavoriteStar";
-
+import { unitConverter } from "../utils/helpers/unitConverter";
 export const FavoritesWeatherCard = ({ favorite }: { favorite: any }) => {
+  const unit = useAppSelector((state) => state.temperature.unit);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  console.log(favorite);
+
   const handleRedirectOnClick = (Key: string, city: string, country: string) => {
     dispatch(fetchWeather(Key, city, country));
     navigate("/");
@@ -54,7 +56,7 @@ export const FavoritesWeatherCard = ({ favorite }: { favorite: any }) => {
           {favorite.loading ? (
             <CircularProgress color="inherit" size={60} />
           ) : (
-            <Typography variant="body1">{favorite.temperature}&deg;C</Typography>
+            <Typography variant="body1">{unit == "C" ? `${favorite.temperature}°` : `${unitConverter(favorite.temperature)}°`}</Typography>
           )}
         </Box>
         <img src={`/icons/${favorite.icon}.png`} />

@@ -10,7 +10,7 @@ import { AppBar, Container, Toolbar, Typography, Button, Fade, MenuItem } from "
 import CloudQueueIcon from "@mui/icons-material/CloudQueue";
 import { toggleDarkMode } from "../state/themeSlice"; // Import action creator
 import { useAppDispatch, useAppSelector } from "../state/store";
-
+import TemperatureToggle from "./TemperatureToggle";
 function CustomAppBar() {
   const location = useLocation();
   const [animate, setAnimate] = useState(false);
@@ -160,6 +160,7 @@ function CustomAppBar() {
                 {darkMode ? <DarkModeIcon /> : <LightModeIcon />}
               </IconButton>
             </Box>
+            <TemperatureToggle />
           </Toolbar>
         </Container>
       </AppBar>

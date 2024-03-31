@@ -2,7 +2,8 @@ import React from "react";
 import { Typography, Box, Grid, Fade } from "@mui/material";
 import FavoriteStar from "../partials/FavoriteStar";
 import { getCurrentDate } from "../utils/helpers/getCurrentDate";
-
+import { useAppSelector } from "../state/store";
+import { unitConverter } from "../utils/helpers/unitConverter";
 interface Temperature {
   Metric: {
     Value: number;
@@ -25,7 +26,7 @@ interface WeatherCardProps {
   fiveDayForecast: any;
 }
 const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperature, fiveDayForecast, WeatherIcon, WeatherText }) => {
-  console.log(Key);
+  const unit = useAppSelector((state) => state.temperature.unit);
 
   //   const { city country, temperature, fiveDayForecast } = weatherData;
   return (
@@ -62,7 +63,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperatu
             </Typography>
             <img src={`/icons/${WeatherIcon}.png`} width="100px" />
             <Typography variant="h5" sx={{ fontFamily: "monospace" }}>
-              {WeatherText}{" "}
+              {WeatherText}
             </Typography>
           </Box>
         </Grid>
@@ -77,12 +78,15 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperatu
             }}
           >
             <Typography variant="h1" sx={{ fontFamily: "monospace" }}>
-              {`${temperature.Metric.Value}°`}
+              {unit == "C" ? `${temperature.Metric.Value}°` : `${temperature.Imperial.Value}°`}
             </Typography>
-            <Typography
-              sx={{ fontFamily: "monospace" }}
-              variant="h5"
-            >{`${fiveDayForecast[0].tempretures.Maximum.Value}° / ${fiveDayForecast[0].tempretures.Minimum.Value}°`}</Typography>
+            <Typography sx={{ fontFamily: "monospace" }} variant="h5">
+              {unit == "C"
+                ? `${fiveDayForecast[0].tempretures.Maximum.Value}° / ${fiveDayForecast[0].tempretures.Minimum.Value}°`
+                : `${unitConverter(fiveDayForecast[0].tempretures.Maximum.Value)}° / ${unitConverter(
+                    fiveDayForecast[0].tempretures.Minimum.Value
+                  )}°`}
+            </Typography>
           </Box>
         </Grid>
 
@@ -104,8 +108,12 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperatu
                   <Typography sx={{ fontFamily: "monospace" }} variant="body2">
                     {day.dayOfWeek}
                   </Typography>
-                  <Typography sx={{ fontFamily: "monospace" }} variant="body2">{`${day.tempretures.Maximum.Value}° max`}</Typography>
-                  <Typography sx={{ fontFamily: "monospace" }} variant="body2">{`${day.tempretures.Minimum.Value}° min`}</Typography>
+                  <Typography sx={{ fontFamily: "monospace" }} variant="body2">
+                    {unit == "C" ? `${day.tempretures.Maximum.Value}° max` : `${unitConverter(day.tempretures.Maximum.Value)}\° max`}
+                  </Typography>
+                  <Typography sx={{ fontFamily: "monospace" }} variant="body2">
+                    {unit == "C" ? `${day.tempretures.Minimum.Value}° min` : `${unitConverter(day.tempretures.Minimum.Value)}\° min`}
+                  </Typography>
                 </Box>
               );
             })}

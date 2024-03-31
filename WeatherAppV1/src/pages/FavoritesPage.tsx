@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { CircularProgress, Container, Grid, Typography, Paper } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import { fetchFavoritesWeather } from "../utils/api/fetchFavorites"; // Update this import with the correct path
-import FavoriteStar from "../partials/FavoriteStar";
-import { useAppDispatch, useAppSelector } from "../state/store";
+import NoFavoritesBox from "../components/NoFavoritesBox";
+import { useAppSelector } from "../state/store";
 import { FavoritesWeatherCard } from "../partials/FavoritesWeatherCard";
-import { useNavigate } from "react-router-dom";
 const FavoritesPage: React.FC = () => {
   const [favoritesWeather, setFavoritesWeather] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const favorites = useAppSelector((state) => state.favorites);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
@@ -37,7 +34,8 @@ const FavoritesPage: React.FC = () => {
             Favorites
           </Typography>
         </Grid>
-        {favoritesWeather.length == 0 && <div>No favorite sso far</div>}
+        {loading && <h1>loading</h1>}
+        {!loading && favoritesWeather.length == 0 && <NoFavoritesBox />}
         {/* {loading ? (
           <Grid item xs={12} style={{ textAlign: "center" }}>
             <CircularProgress color="primary" />
