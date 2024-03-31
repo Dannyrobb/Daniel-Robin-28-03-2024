@@ -10,6 +10,7 @@ interface Favorite {
 interface FavoriteWeatherData extends Favorite {
   temperature: number;
   weatherText: string;
+  icon: string;
 }
 
 export const fetchFavoritesWeather = async (favorites: Favorite[]): Promise<FavoriteWeatherData[]> => {
@@ -23,7 +24,7 @@ export const fetchFavoritesWeather = async (favorites: Favorite[]): Promise<Favo
       }
 
       const data = response.data;
-      const { Temperature, WeatherText } = data[0]; // Assuming the structure of data received
+      const { Temperature, WeatherText, WeatherIcon } = data[0]; // Assuming the structure of data received
 
       return {
         Key: favorite.Key,
@@ -31,6 +32,7 @@ export const fetchFavoritesWeather = async (favorites: Favorite[]): Promise<Favo
         country: favorite.country,
         temperature: Temperature.Metric.Value,
         weatherText: WeatherText,
+        icon: WeatherIcon,
       };
     });
 

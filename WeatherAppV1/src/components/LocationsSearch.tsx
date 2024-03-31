@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { fetchLocationsLocal } from "../utils/api/locationAutocomplete";
+import { fetchLocations } from "../utils/api/locationAutocomplete";
 import { TextField, Box, Grid } from "@mui/material";
 import { fetchWeather } from "../state/weatherSlice";
 import { useAppDispatch, useAppSelector } from "../state/store";
@@ -8,13 +8,13 @@ import Autocomplete from "@mui/material/Autocomplete";
 
 const LocationsSearch: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
-  const [locationsList, setLocationsList] = useState(fetchLocationsLocal(""));
+  const [locationsList, setLocationsList] = useState<any>([]);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const debounceTimer = setTimeout(() => {
-      setLocationsList(fetchLocationsLocal(inputValue));
+    const debounceTimer = setTimeout(async () => {
+      setLocationsList(await fetchLocations(inputValue));
     }, 300);
     // Cleanup function to clear the timer on component unmount and on each input change
     return () => clearTimeout(debounceTimer);
@@ -24,7 +24,26 @@ const LocationsSearch: React.FC = () => {
     console.log("input");
     setInputValue(e.target.value);
   };
+  // const func = async () => {
+  //   const res = await fetchLocations(inputValue);
+  //   console.log(res);
+  // };
+  // func();
+  // useEffect(() => {
+  //   const fetchLocationsAsync = async () => {
+  //     try {
+  //       const data = await fetchLocations(inputValue);
+  //       setLocationsList(data);
+  //     } catch (error) {
+  //       console.error("Error fetching locations:", error);
+  //       // Handle errors here
+  //     }
+  //   };
 
+  //   const debounceTimer = setTimeout(fetchLocationsAsync, 300);
+
+  //   return () => clearTimeout(debounceTimer);
+  // }, [inputValue]);
   const handleSelectChange = (
     event: React.ChangeEvent<{}>,
     value: { label: string; value: string; Key: string; country: string } | null
@@ -41,12 +60,16 @@ const LocationsSearch: React.FC = () => {
     <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={locationsList.map((location) => ({
-        label: location.LocalizedName,
-        value: location.Key,
-        Key: location.Key,
-        country: location.Country.LocalizedName,
-      }))}
+      options={
+        locationsList && locationsList.length > 0
+          ? locationsList.map((location) => ({
+              label: location.LocalizedName,
+              value: location.Key,
+              Key: location.Key,
+              country: location.Country.LocalizedName,
+            }))
+          : []
+      }
       sx={{ width: 300, display: "block", marginTop: "20px", marginBottom: "20px" }}
       onChange={handleSelectChange}
       onInputChange={(e) => handleInputChange(e)}

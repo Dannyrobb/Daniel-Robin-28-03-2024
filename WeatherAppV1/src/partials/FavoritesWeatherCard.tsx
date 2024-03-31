@@ -7,7 +7,7 @@ import FavoriteStar from "./FavoriteStar";
 export const FavoritesWeatherCard = ({ favorite }: { favorite: any }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
+  console.log(favorite);
   const handleRedirectOnClick = (Key: string, city: string, country: string) => {
     dispatch(fetchWeather(Key, city, country));
     navigate("/");
@@ -55,7 +55,7 @@ export const FavoritesWeatherCard = ({ favorite }: { favorite: any }) => {
             <Typography variant="body1">{favorite.temperature}&deg;C</Typography>
           )}
         </Box>
-        <img src={`/icons/${favorite.WeatherIcon}.png`} />
+        <img src={`/icons/${favorite.icon}.png`} />
         <Typography variant="body1" gutterBottom>
           {favorite.weatherText}
         </Typography>

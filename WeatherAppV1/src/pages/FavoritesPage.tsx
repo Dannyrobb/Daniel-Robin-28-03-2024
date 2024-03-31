@@ -6,30 +6,28 @@ import { useAppDispatch, useAppSelector } from "../state/store";
 import { FavoritesWeatherCard } from "../partials/FavoritesWeatherCard";
 import { useNavigate } from "react-router-dom";
 const FavoritesPage: React.FC = () => {
-  const [favoritesWeather, setFavoritesWeather] = useState<any[]>([
-    { Key: "12312", country: "Israel", city: "Tel-Aviv", temperature: "23", weatherText: "Sunny", WeatherIcon: "2" },
-  ]);
+  const [favoritesWeather, setFavoritesWeather] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const favorites = useAppSelector((state) => state.favorites);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   const fetchFavorites = async () => {
-  //     try {
-  //       // Replace favoritesData with your actual favorites array from your global state
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      try {
+        // Replace favoritesData with your actual favorites array from your global state
 
-  //       const weatherData = await fetchFavoritesWeather(favorites.list);
-  //       setFavoritesWeather(weatherData);
-  //       console.log(weatherData);
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.error("Error fetching favorites weather:", error);
-  //       // Handle error appropriately
-  //     }
-  //   };
+        const weatherData = await fetchFavoritesWeather(favorites.list);
+        setFavoritesWeather(weatherData);
+        console.log(weatherData);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching favorites weather:", error);
+        // Handle error appropriately
+      }
+    };
 
-  //   fetchFavorites();
-  // }, [favorites]);
+    fetchFavorites();
+  }, [favorites]);
 
   return (
     <Container>

@@ -19,8 +19,9 @@ interface LocationData {
 
 export const fetchLocations = async (searchTerm: string): Promise<LocationData[]> => {
   try {
+    console.log("fetch locations");
     const response = await axios.get(`${BASE_URL_LOCATIONS}?apikey=${API_KEY}&q=${searchTerm}`);
-
+    console.log(response);
     if (response.status !== 200) {
       throw new Error(`Failed to fetch location data. Status: ${response.status}`);
     }
@@ -34,17 +35,17 @@ export const fetchLocations = async (searchTerm: string): Promise<LocationData[]
   }
 };
 
-export const fetchLocationsLocal = (searchTerm: string) => {
-  try {
-    const filteredLocations = locations.filter((location) => {
-      return location.LocalizedName.toLowerCase().startsWith(searchTerm.toLowerCase());
-    });
+// export const fetchLocationsLocal = (searchTerm: string) => {
+//   try {
+//     const filteredLocations = locations.filter((location) => {
+//       return location.LocalizedName.toLowerCase().startsWith(searchTerm.toLowerCase());
+//     });
 
-    console.log(filteredLocations);
+//     console.log(filteredLocations);
 
-    return filteredLocations;
-  } catch (error) {
-    console.error("Error fetching location data:", error);
-    throw error;
-  }
-};
+//     return filteredLocations;
+//   } catch (error) {
+//     console.error("Error fetching location data:", error);
+//     throw error;
+//   }
+// };
