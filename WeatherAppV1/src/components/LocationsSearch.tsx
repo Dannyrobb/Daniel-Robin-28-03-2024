@@ -1,8 +1,8 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { fetchLocations } from "../utils/api/locationAutocomplete";
-import { TextField, Box, Grid } from "@mui/material";
+import { TextField } from "@mui/material";
 import { fetchWeather } from "../state/weatherSlice";
-import { useAppDispatch, useAppSelector } from "../state/store";
+import { useAppDispatch } from "../state/store";
 
 import Autocomplete from "@mui/material/Autocomplete";
 
@@ -24,26 +24,7 @@ const LocationsSearch: React.FC = () => {
     console.log("input");
     setInputValue(e.target.value);
   };
-  // const func = async () => {
-  //   const res = await fetchLocations(inputValue);
-  //   console.log(res);
-  // };
-  // func();
-  // useEffect(() => {
-  //   const fetchLocationsAsync = async () => {
-  //     try {
-  //       const data = await fetchLocations(inputValue);
-  //       setLocationsList(data);
-  //     } catch (error) {
-  //       console.error("Error fetching locations:", error);
-  //       // Handle errors here
-  //     }
-  //   };
 
-  //   const debounceTimer = setTimeout(fetchLocationsAsync, 300);
-
-  //   return () => clearTimeout(debounceTimer);
-  // }, [inputValue]);
   const handleSelectChange = (
     event: React.ChangeEvent<{}>,
     value: { label: string; value: string; Key: string; country: string } | null
