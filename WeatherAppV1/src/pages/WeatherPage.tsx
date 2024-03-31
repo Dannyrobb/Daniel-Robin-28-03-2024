@@ -2,7 +2,7 @@ import React from "react";
 import { useAppDispatch, useAppSelector } from "../state/store";
 import LocationsSearch from "../components/LocationsSearch";
 import LocationPermission from "../components/LocationPermission";
-import { Typography, CircularProgress, Container, Grid, Paper, Box } from "@mui/material";
+import { Typography, CircularProgress, Container } from "@mui/material";
 import WeatherCard from "../partials/Weathercard";
 const WeatherPage: React.FC = () => {
   const weather = useAppSelector((state) => state.weather);
