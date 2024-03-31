@@ -4,8 +4,6 @@ import LocationsSearch from "../components/LocationsSearch";
 import { Typography, CircularProgress, Container } from "@mui/material";
 import WeatherCard from "../partials/Weathercard";
 import { fetchWeather } from "../state/weatherSlice";
-import { getGeoLocation } from "../utils/helpers/getGeoLocation";
-import { handleGeolocationPermission } from "../utils/helpers/getGeoLocation";
 
 const WeatherPage: React.FC = () => {
   const weather = useAppSelector((state) => state.weather);

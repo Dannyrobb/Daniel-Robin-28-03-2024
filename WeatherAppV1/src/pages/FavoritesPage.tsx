@@ -4,6 +4,7 @@ import { fetchFavoritesWeather } from "../utils/api/fetchFavorites"; // Update t
 import NoFavoritesBox from "../components/NoFavoritesBox";
 import { useAppSelector } from "../state/store";
 import { FavoritesWeatherCard } from "../partials/FavoritesWeatherCard";
+import { CircularProgress, Fade } from "@mui/material";
 const FavoritesPage: React.FC = () => {
   const [favoritesWeather, setFavoritesWeather] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -30,11 +31,13 @@ const FavoritesPage: React.FC = () => {
     <Container>
       <Grid container spacing={3} justifyContent="center" alignItems="center">
         <Grid item xs={12}>
-          <Typography variant="h1" align="center" gutterBottom>
-            Favorites
-          </Typography>
+          <Fade in={true} timeout={444}>
+            <Typography variant="h1" align="center" gutterBottom>
+              Favorites
+            </Typography>
+          </Fade>
         </Grid>
-        {loading && <h1>loading</h1>}
+        {loading && <CircularProgress color="inherit" size={60} />}
         {!loading && favoritesWeather.length == 0 && <NoFavoritesBox />}
         {/* {loading ? (
           <Grid item xs={12} style={{ textAlign: "center" }}>

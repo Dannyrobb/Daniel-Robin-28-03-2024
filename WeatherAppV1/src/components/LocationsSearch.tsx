@@ -31,10 +31,6 @@ const LocationsSearch: React.FC = () => {
     value: { label: string; value: string; Key: string; country: string } | null
   ) => {
     if (value) {
-      console.log("Selected Location Key:", value.value);
-      console.log("Selected Location Label:", value.label);
-      console.log(value.country);
-      console.log(value);
       dispatch(fetchWeather(value.Key, value.label, value.country));
     }
   };
