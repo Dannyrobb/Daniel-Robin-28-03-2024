@@ -63,7 +63,7 @@ const LocationsSearch: React.FC = () => {
       options={
         locationsList && locationsList.length > 0
           ? locationsList.map((location) => ({
-              label: location.LocalizedName,
+              label: `${location.LocalizedName}`,
               value: location.Key,
               Key: location.Key,
               country: location.Country.LocalizedName,

@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../state/store";
 import LocationsSearch from "../components/LocationsSearch";
 import LocationPermission from "../components/LocationPermission";
 import { Typography, CircularProgress, Container } from "@mui/material";
 import WeatherCard from "../partials/Weathercard";
+import { fetchWeather } from "../state/weatherSlice";
+
 const WeatherPage: React.FC = () => {
   const weather = useAppSelector((state) => state.weather);
   console.log(weather);
-
+  useEffect(() => {
+    fetchWeather("215854", "Tel Aviv", "Israel");
+  }, []);
   return (
     <Container sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
       <LocationPermission />

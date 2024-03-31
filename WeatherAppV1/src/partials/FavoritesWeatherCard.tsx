@@ -27,6 +27,9 @@ export const FavoritesWeatherCard = ({ favorite }: { favorite: any }) => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "space-around",
+          backgroundImage: `url('/Images/IMG_8777.jpeg')`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
         }}
       >
         <Typography variant="h4" onClick={() => handleRedirectOnClick(favorite.Key, favorite.city, favorite.country)}>
