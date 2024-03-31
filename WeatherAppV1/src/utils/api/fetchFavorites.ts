@@ -2,7 +2,7 @@ import axios from "axios";
 import { BASE_URL_CURRENT_WEATHER, API_KEY } from "../../../config";
 
 interface Favorite {
-  key: string;
+  Key: string;
   city: string;
   country: string;
 }
@@ -15,7 +15,8 @@ interface FavoriteWeatherData extends Favorite {
 export const fetchFavoritesWeather = async (favorites: Favorite[]): Promise<FavoriteWeatherData[]> => {
   try {
     const promises = favorites.map(async (favorite) => {
-      const response = await axios.get(`${BASE_URL_CURRENT_WEATHER}/${favorite.key}?apikey=${API_KEY}`);
+      console.log(favorite);
+      const response = await axios.get(`${BASE_URL_CURRENT_WEATHER}/${favorite.Key}?apikey=${API_KEY}`);
 
       if (response.status !== 200) {
         throw new Error(`Failed to fetch weather data for ${favorite.city}, ${favorite.country}. Status: ${response.status}`);
@@ -25,7 +26,7 @@ export const fetchFavoritesWeather = async (favorites: Favorite[]): Promise<Favo
       const { Temperature, WeatherText } = data[0]; // Assuming the structure of data received
 
       return {
-        key: favorite.key,
+        Key: favorite.Key,
         city: favorite.city,
         country: favorite.country,
         temperature: Temperature.Metric.Value,

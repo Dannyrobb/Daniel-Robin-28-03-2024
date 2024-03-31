@@ -26,8 +26,13 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
-  min-width: 320px;
+  /* min-width: 320px; */
   min-height: 100vh;
+  display: block;
+  /* background-color: linear-gradient(225deg, #a9b8c7 0%, #d0c6c1 100%); */
+  background-image: url(../public/Images/gradient.png);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 h1 {

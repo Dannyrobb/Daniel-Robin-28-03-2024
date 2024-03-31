@@ -1,5 +1,5 @@
 // theme.ts
-import { createTheme } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 import { useAppSelector } from "../state/store";
 
 export const useCustomTheme = () => {

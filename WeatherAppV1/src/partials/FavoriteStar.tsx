@@ -7,12 +7,12 @@ import { addFavorite, removeFavorite, selectFavorites } from "../state/favorties
 import { Tooltip } from "@mui/material";
 
 interface WeatherDetails {
-  key: string;
+  Key: string;
   city: string;
   country: string;
 }
 interface Favorite {
-  key: string;
+  Key: string;
   city: string;
   country: string;
 }
@@ -23,14 +23,15 @@ interface FavoriteStarProps {
 const FavoriteStar: React.FC<FavoriteStarProps> = ({ weatherDetails }) => {
   const dispatch = useDispatch();
   const favoritesArray: Favorite[] = useSelector(selectFavorites);
-  const { key, city, country } = weatherDetails;
-  console.log(key);
+  console.log(weatherDetails);
+  const { Key, city, country } = weatherDetails;
+  console.log(Key);
 
   const handleHeartClick = () => {
-    if (favoritesArray.some((favorite) => favorite.key === key)) {
-      dispatch(removeFavorite(key));
+    if (favoritesArray.some((favorite) => favorite.Key === Key)) {
+      dispatch(removeFavorite(Key));
     } else {
-      dispatch(addFavorite({ key, city, country }));
+      dispatch(addFavorite({ Key, city, country }));
     }
   };
 
@@ -38,11 +39,11 @@ const FavoriteStar: React.FC<FavoriteStarProps> = ({ weatherDetails }) => {
     <IconButton
       sx={{
         marginLeft: 1,
-        color: favoritesArray.some((favorite) => favorite.key === key) ? "red" : "inherit",
+        color: favoritesArray.some((favorite) => favorite.Key === Key) ? "red" : "inherit",
       }}
       onClick={handleHeartClick}
     >
-      {favoritesArray.some((favorite) => favorite.key === key) ? (
+      {favoritesArray.some((favorite) => favorite.Key === Key) ? (
         <Tooltip title="Remove from favorites" placement="right-start">
           <FavoriteIcon />
         </Tooltip>

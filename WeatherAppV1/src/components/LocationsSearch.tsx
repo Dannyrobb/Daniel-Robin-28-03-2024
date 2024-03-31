@@ -27,14 +27,14 @@ const LocationsSearch: React.FC = () => {
 
   const handleSelectChange = (
     event: React.ChangeEvent<{}>,
-    value: { label: string; value: string; key: string; country: string } | null
+    value: { label: string; value: string; Key: string; country: string } | null
   ) => {
     if (value) {
       console.log("Selected Location Key:", value.value);
       console.log("Selected Location Label:", value.label);
       console.log(value.country);
       console.log(value);
-      dispatch(fetchWeather(value.key, value.label, value.country));
+      dispatch(fetchWeather(value.Key, value.label, value.country));
     }
   };
   return (
@@ -44,13 +44,13 @@ const LocationsSearch: React.FC = () => {
       options={locationsList.map((location) => ({
         label: location.LocalizedName,
         value: location.Key,
-        key: location.Key,
+        Key: location.Key,
         country: location.Country.LocalizedName,
       }))}
-      sx={{ width: 300 }}
+      sx={{ width: 300, display: "block", marginTop: "20px", marginBottom: "20px" }}
       onChange={handleSelectChange}
       onInputChange={(e) => handleInputChange(e)}
-      renderInput={(params) => <TextField {...params} label="Movie" />}
+      renderInput={(params) => <TextField {...params} label="City" />}
     />
   );
 };

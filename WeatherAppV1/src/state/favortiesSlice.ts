@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface Favorite {
   city: string;
   country: string;
-  key: string;
+  Key: string;
 }
 
 interface FavoritesState {
@@ -20,13 +20,13 @@ const favoritesSlice = createSlice({
   reducers: {
     addFavorite: (state, action: PayloadAction<Favorite>) => {
       const newFavorite = action.payload;
-      if (!state.list.some((item) => item.key === newFavorite.key)) {
+      if (!state.list.some((item) => item.Key === newFavorite.Key)) {
         state.list.push(newFavorite);
         localStorage.setItem("favorites", JSON.stringify(state.list));
       }
     },
     removeFavorite: (state, action: PayloadAction<string>) => {
-      state.list = state.list.filter((item) => item.key !== action.payload);
+      state.list = state.list.filter((item) => item.Key !== action.payload);
       localStorage.setItem("favorites", JSON.stringify(state.list));
     },
   },

@@ -26,7 +26,8 @@ interface WeatherData {
   Link: string;
   city: string;
   country: string;
-  key: string;
+  Key: string;
+  fiveDayForecast: [];
 }
 
 interface WeatherState {

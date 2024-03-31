@@ -5,11 +5,12 @@ import CustomAppBar from "./components/AppBar";
 import FavoritesPage from "./pages/FavoritesPage";
 import { useCustomTheme } from "./assets/theme";
 import { ThemeProvider } from "@emotion/react";
+
 const App: React.FC = () => {
   const theme = useCustomTheme();
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
+      <div>
         <CustomAppBar />
         <Routes>
           <Route path="/" element={<WeatherPage />} />
