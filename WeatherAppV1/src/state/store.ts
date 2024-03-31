@@ -1,7 +1,6 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import weatherReducer from "./weatherSlice";
 import themeReducer from "./themeSlice";
-import locationSlice from "./locationSlice";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import favortiesSlice from "./favortiesSlice";
 import toggleUnitSwitch from "./toggleUnitSwitchSlice";
@@ -10,7 +9,6 @@ const store = configureStore({
   reducer: {
     weather: weatherReducer,
     theme: themeReducer,
-    location: locationSlice,
     favorites: favortiesSlice,
     temperature: toggleUnitSwitch,
   },

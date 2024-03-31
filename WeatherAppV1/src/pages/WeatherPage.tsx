@@ -1,22 +1,24 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../state/store";
 import LocationsSearch from "../components/LocationsSearch";
-import LocationPermission from "../components/LocationPermission";
 import { Typography, CircularProgress, Container } from "@mui/material";
 import WeatherCard from "../partials/Weathercard";
 import { fetchWeather } from "../state/weatherSlice";
-
+import { getGeoLocation } from "../utils/helpers/getGeoLocation";
 const WeatherPage: React.FC = () => {
   const weather = useAppSelector((state) => state.weather);
   console.log(weather);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(fetchWeather("215854", "Tel Aviv", "Israel"));
+    const userAnswer = confirm("Can we use your geo location ?");
+    if (userAnswer) {
+      getGeoLocation().then((data) => dispatch(fetchWeather(data.key, data.cityName, data.countryName)));
+    } else {
+      dispatch(fetchWeather("215854", "Tel Aviv", "Israel"));
+    }
   }, []);
   return (
     <Container sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-      <LocationPermission />
-
       <LocationsSearch />
 
       {weather.loading && <CircularProgress color="primary" />}

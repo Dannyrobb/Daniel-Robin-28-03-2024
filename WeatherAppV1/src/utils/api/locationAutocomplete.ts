@@ -1,6 +1,5 @@
 import axios from "axios";
-import { BASE_URL_LOCATIONS, API_KEY, BASE_URL_CURRENT_WEATHER } from "../../../config";
-import locations from "../../assets/demo.json";
+import { BASE_URL_LOCATIONS, API_KEY } from "../../../config";
 interface LocationData {
   Version: number;
   Key: string;
