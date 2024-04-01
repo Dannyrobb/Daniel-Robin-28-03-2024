@@ -47,8 +47,6 @@ export const fetchCurrentWeather = async (locationKey: string, locationCity: str
 
     const currentWeatherData = currentWeatherResponse.data[0];
     const fiveDayForecastData = fiveDayForecastResponse.data.DailyForecasts.map((forcast: WeatherForecast) => {
-      console.log("Function");
-      console.log(fiveDayForecastResponse.data.DailyForecasts);
       return { dayOfWeek: epochTimeConverter(forcast.EpochDate), tempretures: forcast.Temperature };
     });
 

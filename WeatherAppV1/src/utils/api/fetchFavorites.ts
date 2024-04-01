@@ -16,7 +16,6 @@ interface FavoriteWeatherData extends Favorite {
 export const fetchFavoritesWeather = async (favorites: Favorite[]): Promise<FavoriteWeatherData[]> => {
   try {
     const promises = favorites.map(async (favorite) => {
-      console.log(favorite);
       const response = await axios.get(`${BASE_URL_CURRENT_WEATHER}/${favorite.Key}?apikey=${API_KEY}`);
 
       if (response.status !== 200) {

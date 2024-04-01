@@ -70,7 +70,6 @@ export const fetchWeather =
     try {
       const data = await fetchCurrentWeather(locationKey, locationCity, locationCountry);
 
-      console.log(data);
       dispatch(fetchWeatherSuccess(data));
     } catch (error) {
       dispatch(fetchWeatherFailure(error.toString()));

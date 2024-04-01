@@ -35,7 +35,15 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperatu
         container
         spacing={0}
         sx={{
-          backgroundImage: `url('/Images/IMG_8777.jpeg')`,
+          // backgroundImage: `url('/Images/IMG_8777.jpeg')`,
+          // backgroundImage: `url('${WeatherText.toLowerCase().includes("cloud") ? "/Images/IMG_8777.jpeg" : "/Images/sunny.jpg"}')`,
+          backgroundImage: `url('${
+            WeatherText.toLowerCase().includes("rain")
+              ? "/Images/rainy.jpg"
+              : WeatherText.toLowerCase().includes("sun")
+              ? "/Images/sunny.jpg"
+              : "/Images/IMG_8777.jpeg"
+          }')`,
           backgroundRepeat: "no-repeat",
           maxWidth: { xs: "100%", sm: "600px", md: "800px" },
           backgroundSize: "cover",
@@ -102,9 +110,9 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperatu
               flexWrap: "wrap",
             }}
           >
-            {fiveDayForecast.map((day) => {
+            {fiveDayForecast.map((day, index) => {
               return (
-                <Box sx={{ display: "flex", flexDirection: "column", margin: "4px", borderRadius: "4px" }}>
+                <Box key={index} sx={{ display: "flex", flexDirection: "column", margin: "4px", borderRadius: "4px" }}>
                   <Typography sx={{ fontFamily: "monospace" }} variant="body2">
                     {day.dayOfWeek}
                   </Typography>

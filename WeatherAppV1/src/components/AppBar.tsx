@@ -8,17 +8,13 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AppBar, Container, Toolbar, Typography, Button, Fade, MenuItem } from "@mui/material";
 import CloudQueueIcon from "@mui/icons-material/CloudQueue";
-import { toggleDarkMode } from "../state/themeSlice"; // Import action creator
 import { useAppDispatch, useAppSelector } from "../state/store";
 import TemperatureToggle from "./TemperatureToggle";
 function CustomAppBar() {
   const location = useLocation();
   const [animate, setAnimate] = useState(false);
-  const darkMode = useAppSelector((state) => state.theme.darkMode);
   const dispatch = useAppDispatch();
-  const handleToggleTheme = () => {
-    dispatch(toggleDarkMode()); // Dispatch action to toggle dark mode
-  };
+
   useEffect(() => {
     // Trigger animation by setting animate state to true after a short delay
     const timer = setTimeout(() => {
@@ -155,11 +151,7 @@ function CustomAppBar() {
                 </Button>
               )}
             </Box>
-            <Box>
-              <IconButton onClick={handleToggleTheme} color="inherit" aria-label="toggle theme">
-                {darkMode ? <DarkModeIcon /> : <LightModeIcon />}
-              </IconButton>
-            </Box>
+
             <TemperatureToggle />
           </Toolbar>
         </Container>

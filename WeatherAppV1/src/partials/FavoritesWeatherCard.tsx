@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "../state/store";
 import { fetchWeather } from "../state/weatherSlice";
 import { useNavigate } from "react-router-dom";
-import { Grid, Typography, Paper, CircularProgress, Box } from "@mui/material";
+import { Grid, Typography, Paper, CircularProgress } from "@mui/material";
 import FavoriteStar from "./FavoriteStar";
 import { unitConverter } from "../utils/helpers/unitConverter";
 import { Fade } from "@mui/material";
@@ -25,27 +25,45 @@ export const FavoritesWeatherCard = ({ favorite }: { favorite: any }) => {
             padding: "20px",
             borderRadius: "10px",
             height: "auto",
-            minHeight: "356px",
+            minHeight: "300px",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "space-around",
-            backgroundImage: `url('/Images/IMG_8777.jpeg')`,
+            // backgroundImage: `url('/Images/IMG_8777.jpeg')`,
+            // backgroundImage: `url('${
+            //   favorite.weatherText.toLowerCase().includes("cloud") ? "/Images/rainy.jpg" : "/Images/IMG_8777.jpeg"
+            // }')`,
+            backgroundImage: `url('${
+              favorite.weatherText.toLowerCase().includes("rain")
+                ? "/Images/rainy.jpg"
+                : favorite.weatherText.toLowerCase().includes("sun")
+                ? "/Images/sunny.jpg"
+                : "/Images/IMG_8777.jpeg"
+            }')`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
+            color: "white",
+            margin: "30px",
           }}
         >
-          <Typography variant="h4" onClick={() => handleRedirectOnClick(favorite.Key, favorite.city, favorite.country)}>
+          <Typography
+            variant="h4"
+            onClick={() => handleRedirectOnClick(favorite.Key, favorite.city, favorite.country)}
+            sx={{ fontFamily: "monospace" }}
+          >
             {favorite.city}, {favorite.country}
           </Typography>
 
           {favorite.loading ? (
             <CircularProgress color="inherit" size={60} />
           ) : (
-            <Typography variant="h5">{unit == "C" ? `${favorite.temperature}°` : `${unitConverter(favorite.temperature)}°`}</Typography>
+            <Typography variant="h5" sx={{ fontFamily: "monospace" }}>
+              {unit == "C" ? `${favorite.temperature}°` : `${unitConverter(favorite.temperature)}°`}
+            </Typography>
           )}
 
-          <Typography variant="body1" gutterBottom>
+          <Typography variant="body1" gutterBottom sx={{ fontFamily: "monospace" }}>
             {favorite.weatherText}
           </Typography>
           <img src={`/icons/${favorite.icon}.png`} />

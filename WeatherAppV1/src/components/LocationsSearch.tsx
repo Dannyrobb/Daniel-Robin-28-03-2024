@@ -22,7 +22,6 @@ const LocationsSearch: React.FC = () => {
   }, [inputValue]);
 
   const handleInputChange = (e: any) => {
-    console.log("input");
     setInputValue(e.target.value);
   };
 

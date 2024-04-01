@@ -28,11 +28,11 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
-  /* min-width: 320px; */
   min-height: 100vh;
   display: block;
   /* background-color: lightblue; */
-  background-image: url(../public/Images/background.jpg);
+  /* background-image: url(/Images/background.jpg); */
+  background-image: url(/Images/SkyBackgroundEdited.png);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -63,8 +63,8 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: #ffffff;
+    background-color: #213547;
   }
   a:hover {
     color: #747bff;
