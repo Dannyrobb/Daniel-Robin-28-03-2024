@@ -26,7 +26,7 @@ const LocationsSearch: React.FC = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setInputValue(value);
-    // Validate input for English characters only
+
     setIsInputValid(/^[a-zA-Z\s]*$/.test(value));
   };
 
@@ -63,8 +63,8 @@ const LocationsSearch: React.FC = () => {
           <TextField
             {...params}
             label="Search"
-            error={!isInputValid} // Apply error state if input is not valid
-            helperText={!isInputValid ? "Only English characters are allowed" : undefined} // Error message
+            error={!isInputValid}
+            helperText={!isInputValid ? "Only English characters are allowed" : undefined}
             onChange={handleInputChange}
           />
         )}
