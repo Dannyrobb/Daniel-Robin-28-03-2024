@@ -8,7 +8,6 @@ const initialState: TemperatureState = {
   unit: "C",
 };
 
-// Create the slice
 const temperatureSlice = createSlice({
   name: "temperature",
   initialState,
@@ -22,8 +21,6 @@ const temperatureSlice = createSlice({
   },
 });
 
-// Export actions
 export const { toggleUnit, setUnit } = temperatureSlice.actions;
 
-// Export reducer
 export default temperatureSlice.reducer;

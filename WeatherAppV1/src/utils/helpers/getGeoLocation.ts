@@ -44,7 +44,7 @@ export function handleGeolocationPermission(dispatch) {
     } else {
       localStorage.setItem("geolocationPermission", false);
       dispatch(fetchWeather("215854", "Tel Aviv", "Israel"));
-      return Promise.resolve(); // Return a resolved promise if user denies permission
+      return Promise.resolve();
     }
   }
 }

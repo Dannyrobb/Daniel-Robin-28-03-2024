@@ -2,21 +2,16 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import LightModeIcon from "@mui/icons-material/LightMode";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AppBar, Container, Toolbar, Typography, Button, Fade, MenuItem } from "@mui/material";
 import CloudQueueIcon from "@mui/icons-material/CloudQueue";
-import { useAppDispatch, useAppSelector } from "../state/store";
 import TemperatureToggle from "./TemperatureToggle";
 function CustomAppBar() {
   const location = useLocation();
   const [animate, setAnimate] = useState(false);
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // Trigger animation by setting animate state to true after a short delay
     const timer = setTimeout(() => {
       setAnimate(true);
     }, 100);

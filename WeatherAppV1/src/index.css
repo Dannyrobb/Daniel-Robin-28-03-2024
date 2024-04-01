@@ -30,9 +30,8 @@ body {
   justify-content: center;
   min-height: 100vh;
   display: block;
-  /* background-color: lightblue; */
-  /* background-image: url(/Images/background.jpg); */
-  background-image: url(/Images/SkyBackgroundEdited.png);
+  background-image: url(/Images/background.jpg);
+  /* background-image: url(/Images/SkyBackgroundEdited.png); */
   background-repeat: no-repeat;
   background-size: cover;
 }

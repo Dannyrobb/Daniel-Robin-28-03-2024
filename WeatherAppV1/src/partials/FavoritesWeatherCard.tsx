@@ -30,10 +30,7 @@ export const FavoritesWeatherCard = ({ favorite }: { favorite: any }) => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "space-around",
-            // backgroundImage: `url('/Images/IMG_8777.jpeg')`,
-            // backgroundImage: `url('${
-            //   favorite.weatherText.toLowerCase().includes("cloud") ? "/Images/rainy.jpg" : "/Images/IMG_8777.jpeg"
-            // }')`,
+
             backgroundImage: `url('${
               favorite.weatherText.toLowerCase().includes("rain")
                 ? "/Images/rainy.jpg"

@@ -28,15 +28,12 @@ interface WeatherCardProps {
 const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperature, fiveDayForecast, WeatherIcon, WeatherText }) => {
   const unit = useAppSelector((state) => state.temperature.unit);
 
-  //   const { city country, temperature, fiveDayForecast } = weatherData;
   return (
     <Fade in={true} timeout={660}>
       <Grid
         container
         spacing={0}
         sx={{
-          // backgroundImage: `url('/Images/IMG_8777.jpeg')`,
-          // backgroundImage: `url('${WeatherText.toLowerCase().includes("cloud") ? "/Images/IMG_8777.jpeg" : "/Images/sunny.jpg"}')`,
           backgroundImage: `url('${
             WeatherText.toLowerCase().includes("rain")
               ? "/Images/rainy.jpg"
