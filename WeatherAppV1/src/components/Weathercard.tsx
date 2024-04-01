@@ -72,14 +72,14 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperatu
             }}
           >
             <Typography variant="h1" sx={{ fontFamily: "monospace" }}>
-              {unit == "C" ? `${temperature.Metric.Value}°` : `${temperature.Imperial.Value}°`}
+              {unit == "C" ? `${temperature.Metric.Value}°C` : `${temperature.Imperial.Value}°F`}
             </Typography>
             <Typography sx={{ fontFamily: "monospace" }} variant="h5">
               {unit == "C"
-                ? `${fiveDayForecast[0].tempretures.Maximum.Value}° / ${fiveDayForecast[0].tempretures.Minimum.Value}°`
-                : `${unitConverter(fiveDayForecast[0].tempretures.Maximum.Value)}° / ${unitConverter(
+                ? `${fiveDayForecast[0].tempretures.Maximum.Value}°C / ${fiveDayForecast[0].tempretures.Minimum.Value}°C`
+                : `${unitConverter(fiveDayForecast[0].tempretures.Maximum.Value)}°F / ${unitConverter(
                     fiveDayForecast[0].tempretures.Minimum.Value
-                  )}°`}
+                  )}°F`}
             </Typography>
           </Box>
         </Grid>

@@ -44,19 +44,21 @@ export const SimpleWeatherCard = ({ favorite }: { favorite: any }) => {
             margin: "30px",
           }}
         >
-          <Typography
-            variant="h4"
-            onClick={() => handleRedirectOnClick(favorite.Key, favorite.city, favorite.country)}
-            sx={{ fontFamily: "monospace" }}
-          >
-            {favorite.city}, {favorite.country}
-          </Typography>
+          <button>
+            <Typography
+              variant="h4"
+              onClick={() => handleRedirectOnClick(favorite.Key, favorite.city, favorite.country)}
+              sx={{ fontFamily: "monospace" }}
+            >
+              {favorite.city}, {favorite.country}
+            </Typography>
+          </button>
 
           {favorite.loading ? (
             <CircularProgress color="inherit" size={60} />
           ) : (
             <Typography variant="h5" sx={{ fontFamily: "monospace" }}>
-              {unit == "C" ? `${favorite.temperature}°` : `${unitConverter(favorite.temperature)}°`}
+              {unit == "C" ? `${favorite.temperature}°C` : `${unitConverter(favorite.temperature)}°F`}
             </Typography>
           )}
 
