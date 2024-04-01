@@ -30,7 +30,6 @@ export async function getGeoPosition(
 
     return { countryName, cityName, key };
   } catch (error) {
-    // Handle errors appropriately
     console.error("Error fetching geo position:", error);
     throw error;
   }

@@ -23,7 +23,7 @@ export const fetchFavoritesWeather = async (favorites: Favorite[]): Promise<Favo
       }
 
       const data = response.data;
-      const { Temperature, WeatherText, WeatherIcon } = data[0]; // Assuming the structure of data received
+      const { Temperature, WeatherText, WeatherIcon } = data[0];
 
       return {
         Key: favorite.Key,
@@ -35,7 +35,6 @@ export const fetchFavoritesWeather = async (favorites: Favorite[]): Promise<Favo
       };
     });
 
-    // Wait for all requests to complete
     const favoritesWeatherData = await Promise.all(promises);
 
     return favoritesWeatherData;

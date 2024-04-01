@@ -17,7 +17,6 @@ const LocationsSearch: React.FC = () => {
     const debounceTimer = setTimeout(async () => {
       setLocationsList(await fetchLocations(inputValue));
     }, 300);
-    // Cleanup function to clear the timer on component unmount and on each input change
     return () => clearTimeout(debounceTimer);
   }, [inputValue]);
 

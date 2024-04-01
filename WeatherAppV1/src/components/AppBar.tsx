@@ -16,7 +16,7 @@ function CustomAppBar() {
       setAnimate(true);
     }, 100);
 
-    return () => clearTimeout(timer); // Cleanup timer
+    return () => clearTimeout(timer);
   }, []);
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -91,7 +91,7 @@ function CustomAppBar() {
                       color="inherit"
                       sx={{
                         display: { xs: "flex" },
-                        // marginLeft: "auto",
+
                         fontSize: "1.2rem",
                         fontWeight: "bold",
                         fontFamily: "Bebas Neue, Arial",

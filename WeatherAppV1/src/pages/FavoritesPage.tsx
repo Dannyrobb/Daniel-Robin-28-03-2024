@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Grid, Typography } from "@mui/material";
-import { fetchFavoritesWeather } from "../utils/api/fetchFavorites"; // Update this import with the correct path
+import { fetchFavoritesWeather } from "../utils/api/fetchFavorites";
 import NoFavoritesBox from "../components/NoFavoritesBox";
 import { useAppSelector } from "../state/store";
 import { FavoritesWeatherCard } from "../partials/FavoritesWeatherCard";
@@ -12,14 +12,11 @@ const FavoritesPage: React.FC = () => {
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
-        // Replace favoritesData with your actual favorites array from your global state
-
         const weatherData = await fetchFavoritesWeather(favorites.list);
         setFavoritesWeather(weatherData);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching favorites weather:", error);
-        // Handle error appropriately
       }
     };
 
