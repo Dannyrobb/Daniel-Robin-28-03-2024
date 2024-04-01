@@ -4,27 +4,8 @@ import FavoriteStar from "../partials/FavoriteStar";
 import { getCurrentDate } from "../utils/helpers/getCurrentDate";
 import { useAppSelector } from "../state/store";
 import { unitConverter } from "../utils/helpers/unitConverter";
-interface Temperature {
-  Metric: {
-    Value: number;
-    Unit: string;
-    UnitType: number;
-  };
-  Imperial: {
-    Value: number;
-    Unit: string;
-    UnitType: number;
-  };
-}
-interface WeatherCardProps {
-  Key: string;
-  city: string;
-  country: string;
-  temperature: Temperature;
-  WeatherIcon: number;
-  WeatherText: string;
-  fiveDayForecast: any;
-}
+import { WeatherCardProps } from "../Interfaces/Temperature";
+
 const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperature, fiveDayForecast, WeatherIcon, WeatherText }) => {
   const unit = useAppSelector((state) => state.temperature.unit);
 
@@ -46,7 +27,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperatu
           backgroundSize: "cover",
           minHeight: { sm: "350px", md: "450px" },
           borderRadius: "20px",
-          mt: "20px",
+          m: "20px",
           color: "white",
         }}
       >

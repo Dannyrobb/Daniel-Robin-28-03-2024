@@ -1,15 +1,6 @@
 import axios from "axios";
 import { API_KEY, BASE_URL_GEOLOCATION } from "../../../config";
-interface GeoPositionResponse {
-  Key: string;
-  Country: {
-    LocalizedName: string;
-  };
-  AdministrativeArea: {
-    LocalizedName: string;
-  };
-}
-
+import { GeoPositionResponse } from "../../Interfaces/GeoLocation";
 export async function getGeoPosition(
   latitude: number,
   longitude: number

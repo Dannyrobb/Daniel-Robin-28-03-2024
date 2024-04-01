@@ -1,17 +1,6 @@
 import axios from "axios";
 import { BASE_URL_CURRENT_WEATHER, API_KEY } from "../../../config";
-
-interface Favorite {
-  Key: string;
-  city: string;
-  country: string;
-}
-
-interface FavoriteWeatherData extends Favorite {
-  temperature: number;
-  weatherText: string;
-  icon: string;
-}
+import { Favorite, FavoriteWeatherData } from "../../Interfaces/Favorites";
 
 export const fetchFavoritesWeather = async (favorites: Favorite[]): Promise<FavoriteWeatherData[]> => {
   try {

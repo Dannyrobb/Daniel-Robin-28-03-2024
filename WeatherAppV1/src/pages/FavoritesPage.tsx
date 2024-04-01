@@ -38,8 +38,8 @@ const FavoritesPage: React.FC = () => {
 
         {favoritesWeather.length > 0 && (
           <>
-            {favoritesWeather.map((favorite) => {
-              return <FavoritesWeatherCard favorite={favorite} />;
+            {favoritesWeather.map((favorite, index) => {
+              return <FavoritesWeatherCard favorite={favorite} key={index} />;
             })}
           </>
         )}

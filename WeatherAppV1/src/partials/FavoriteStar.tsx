@@ -5,20 +5,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavorite, removeFavorite, selectFavorites } from "../state/favortiesSlice";
 import { Tooltip } from "@mui/material";
-
-interface WeatherDetails {
-  Key: string;
-  city: string;
-  country: string;
-}
-interface Favorite {
-  Key: string;
-  city: string;
-  country: string;
-}
-interface FavoriteStarProps {
-  weatherDetails: WeatherDetails;
-}
+import { Favorite, FavoriteStarProps } from "../Interfaces/Favorites";
 
 const FavoriteStar: React.FC<FavoriteStarProps> = ({ weatherDetails }) => {
   const dispatch = useDispatch();

@@ -1,8 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface TemperatureState {
-  unit: "F" | "C";
-}
+import { TemperatureState } from "../Interfaces/Temperature";
 
 const initialState: TemperatureState = {
   unit: "C",

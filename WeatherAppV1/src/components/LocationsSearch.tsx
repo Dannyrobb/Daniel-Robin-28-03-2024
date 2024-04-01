@@ -23,32 +23,41 @@ const LocationsSearch: React.FC = () => {
   const handleInputChange = (e: any) => {
     setInputValue(e.target.value);
   };
+  //CHANGED Key to key
 
   const handleSelectChange = (
     event: React.ChangeEvent<{}>,
-    value: { label: string; value: string; Key: string; country: string } | null
+    value: { label: string; value: string; id: string; country: string } | null
   ) => {
     if (value) {
-      dispatch(fetchWeather(value.Key, value.label, value.country));
+      dispatch(fetchWeather(value.id, value.label, value.country));
     }
   };
+
+  //CHANGED Key to key
   return (
     <div style={{ display: "flex" }}>
       <Autocomplete
         disablePortal
+        disableClearable
         id="combo-box-demo"
         options={
           locationsList && locationsList.length > 0
-            ? locationsList.map((location) => ({
-                label: `${location.LocalizedName}`,
-                value: location.Key,
-                Key: location.Key,
-                country: location.Country.LocalizedName,
-              }))
+            ? locationsList.map((location) => {
+                return {
+                  // label: `${location.LocalizedName}`,
+                  label: `${location.LocalizedName}`,
+                  value: location.Key,
+                  id: location.Key,
+                  key: location.Key,
+                  country: location.Country.LocalizedName,
+                };
+              })
             : []
         }
         sx={{ width: 300, display: "block", marginTop: "20px", marginBottom: "20px" }}
         onChange={handleSelectChange}
+        isOptionEqualToValue={() => true}
         onInputChange={(e) => handleInputChange(e)}
         renderInput={(params) => <TextField {...params} label="City" />}
         noOptionsText="Search for a city!"
