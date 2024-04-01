@@ -3,9 +3,9 @@ import { fetchWeather } from "../state/weatherSlice";
 import { useNavigate } from "react-router-dom";
 import { Grid, Typography, Paper, CircularProgress } from "@mui/material";
 import FavoriteStar from "./FavoriteStar";
-import { unitConverter } from "../utils/helpers/unitConverter";
+import { unitConverter } from "../utils/helpers/helpers";
 import { Fade } from "@mui/material";
-export const FavoritesWeatherCard = ({ favorite }: { favorite: any }) => {
+export const SimpleWeatherCard = ({ favorite }: { favorite: any }) => {
   const unit = useAppSelector((state) => state.temperature.unit);
 
   const dispatch = useAppDispatch();

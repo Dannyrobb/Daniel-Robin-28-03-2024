@@ -3,7 +3,7 @@ import { Container, Grid, Typography } from "@mui/material";
 import { fetchFavoritesWeather } from "../utils/api/fetchFavorites";
 import NoFavoritesBox from "../components/NoFavoritesBox";
 import { useAppSelector } from "../state/store";
-import { FavoritesWeatherCard } from "../partials/FavoritesWeatherCard";
+import { SimpleWeatherCard } from "../components/SimpleWeatherCard";
 import { CircularProgress, Fade } from "@mui/material";
 const FavoritesPage: React.FC = () => {
   const [favoritesWeather, setFavoritesWeather] = useState<any[]>([]);
@@ -39,7 +39,7 @@ const FavoritesPage: React.FC = () => {
         {favoritesWeather.length > 0 && (
           <>
             {favoritesWeather.map((favorite, index) => {
-              return <FavoritesWeatherCard favorite={favorite} key={index} />;
+              return <SimpleWeatherCard favorite={favorite} key={index} />;
             })}
           </>
         )}

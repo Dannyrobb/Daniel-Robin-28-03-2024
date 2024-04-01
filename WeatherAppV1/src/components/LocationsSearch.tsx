@@ -3,7 +3,7 @@ import { fetchLocations } from "../utils/api/locationAutocomplete";
 import { TextField } from "@mui/material";
 import { fetchWeather } from "../state/weatherSlice";
 import { useAppDispatch } from "../state/store";
-import { handleGeolocationPermission } from "../utils/helpers/getGeoLocation";
+import { handleGeolocationPermission } from "../utils/api/fetchGeolocation";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import Autocomplete from "@mui/material/Autocomplete";
 import { IconButton } from "@mui/material";
@@ -59,7 +59,7 @@ const LocationsSearch: React.FC = () => {
         onChange={handleSelectChange}
         isOptionEqualToValue={() => true}
         onInputChange={(e) => handleInputChange(e)}
-        renderInput={(params) => <TextField {...params} label="City" />}
+        renderInput={(params) => <TextField {...params} label="Search" />}
         noOptionsText="Search for a city!"
       />
       <IconButton onClick={() => handleGeolocationPermission(dispatch)}>

@@ -1,9 +1,9 @@
 import React from "react";
 import { Typography, Box, Grid, Fade } from "@mui/material";
-import FavoriteStar from "../partials/FavoriteStar";
-import { getCurrentDate } from "../utils/helpers/getCurrentDate";
+import FavoriteStar from "./FavoriteStar";
+import { getCurrentDate } from "../utils/helpers/helpers";
 import { useAppSelector } from "../state/store";
-import { unitConverter } from "../utils/helpers/unitConverter";
+import { unitConverter } from "../utils/helpers/helpers";
 import { WeatherCardProps } from "../Interfaces/Temperature";
 
 const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperature, fiveDayForecast, WeatherIcon, WeatherText }) => {
@@ -22,13 +22,17 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperatu
               ? "/Images/sunny.jpg"
               : "/Images/IMG_8777.jpeg"
           }')`,
+
           backgroundRepeat: "no-repeat",
           maxWidth: { xs: "100%", sm: "600px", md: "800px" },
           backgroundSize: "cover",
           minHeight: { sm: "350px", md: "450px" },
           borderRadius: "20px",
+
           m: "20px",
           color: "white",
+          // border: "6px solid rgba(255,255,255,0.3)",
+          boxShadow: "10",
         }}
       >
         <Grid item xs={12} sm={6}>
@@ -39,10 +43,14 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperatu
               alignItems: { sm: "flex-start", xs: "center" },
               paddingTop: { xs: "30px", md: "60px" },
               paddingLeft: { xs: "30px", md: "60px" },
+              position: "relative",
             }}
           >
+            <Box sx={{ position: "absolute", left: 0, top: "10px" }}>
+              <FavoriteStar weatherDetails={{ Key, city, country }} />
+            </Box>
             <Typography variant="h4" sx={{ fontFamily: "monospace" }}>
-              {`${city}, ${country}`} <FavoriteStar weatherDetails={{ Key, city, country }} />
+              {`${city}, ${country}`}
             </Typography>
             <Typography variant="body1" sx={{ fontFamily: "monospace" }}>
               {getCurrentDate()}

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../state/store";
 import LocationsSearch from "../components/LocationsSearch";
 import { Typography, CircularProgress, Container } from "@mui/material";
-import WeatherCard from "../partials/Weathercard";
+import WeatherCard from "../components/Weathercard";
 import { fetchWeather } from "../state/weatherSlice";
 
 const WeatherPage: React.FC = () => {
