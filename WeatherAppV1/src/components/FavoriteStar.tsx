@@ -4,7 +4,6 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavorite, removeFavorite, selectFavorites } from "../state/favortiesSlice";
-import { Tooltip } from "@mui/material";
 import { Favorite, FavoriteStarProps } from "../Interfaces/Favorites";
 
 const FavoriteStar: React.FC<FavoriteStarProps> = ({ weatherDetails }) => {
@@ -28,15 +27,7 @@ const FavoriteStar: React.FC<FavoriteStarProps> = ({ weatherDetails }) => {
       }}
       onClick={handleHeartClick}
     >
-      {favoritesArray.some((favorite) => favorite.Key === Key) ? (
-        <Tooltip title="Remove from favorites" placement="right-start">
-          <FavoriteIcon />
-        </Tooltip>
-      ) : (
-        <Tooltip title="Add to favorites" placement="right-start">
-          <FavoriteBorderIcon />
-        </Tooltip>
-      )}
+      {favoritesArray.some((favorite) => favorite.Key === Key) ? <FavoriteIcon /> : <FavoriteBorderIcon />}
     </IconButton>
   );
 };

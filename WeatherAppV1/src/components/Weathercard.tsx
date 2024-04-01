@@ -5,7 +5,7 @@ import { getCurrentDate } from "../utils/helpers/helpers";
 import { useAppSelector } from "../state/store";
 import { unitConverter } from "../utils/helpers/helpers";
 import { WeatherCardProps } from "../Interfaces/Temperature";
-
+import { FiveDayForecastDay } from "../Interfaces/Weather";
 const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperature, fiveDayForecast, WeatherIcon, WeatherText }) => {
   const unit = useAppSelector((state) => state.temperature.unit);
 
@@ -31,7 +31,6 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperatu
 
           m: "20px",
           color: "white",
-          // border: "6px solid rgba(255,255,255,0.3)",
           boxShadow: "10",
         }}
       >
@@ -96,7 +95,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperatu
               flexWrap: "wrap",
             }}
           >
-            {fiveDayForecast.map((day, index) => {
+            {fiveDayForecast.map((day: FiveDayForecastDay, index: number) => {
               return (
                 <Box key={index} sx={{ display: "flex", flexDirection: "column", margin: "4px", borderRadius: "4px" }}>
                   <Typography sx={{ fontFamily: "monospace" }} variant="body2">

@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { Grid, Typography, Paper, CircularProgress } from "@mui/material";
 import FavoriteStar from "./FavoriteStar";
 import { unitConverter } from "../utils/helpers/helpers";
-import { Fade } from "@mui/material";
-export const SimpleWeatherCard = ({ favorite }: { favorite: any }) => {
+import { Fade, Button } from "@mui/material";
+import { SimpleWeatherCardData } from "../Interfaces/Favorites";
+
+export const SimpleWeatherCard = ({ favorite }: { favorite: SimpleWeatherCardData }) => {
   const unit = useAppSelector((state) => state.temperature.unit);
 
   const dispatch = useAppDispatch();
@@ -44,15 +46,14 @@ export const SimpleWeatherCard = ({ favorite }: { favorite: any }) => {
             margin: "30px",
           }}
         >
-          <button>
-            <Typography
-              variant="h4"
-              onClick={() => handleRedirectOnClick(favorite.Key, favorite.city, favorite.country)}
-              sx={{ fontFamily: "monospace" }}
-            >
+          <Button
+            onClick={() => handleRedirectOnClick(favorite.Key, favorite.city, favorite.country)}
+            sx={{ color: "inherit", textTransform: "capitalize" }}
+          >
+            <Typography variant="h4" sx={{ fontFamily: "monospace", color: "inherit" }}>
               {favorite.city}, {favorite.country}
             </Typography>
-          </button>
+          </Button>
 
           {favorite.loading ? (
             <CircularProgress color="inherit" size={60} />

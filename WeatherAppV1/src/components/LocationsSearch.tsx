@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React, { useState, useEffect } from "react";
 import { fetchLocations } from "../utils/api/locationAutocomplete";
 import { TextField } from "@mui/material";
 import { fetchWeather } from "../state/weatherSlice";
@@ -7,9 +7,12 @@ import { handleGeolocationPermission } from "../utils/api/fetchGeolocation";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import Autocomplete from "@mui/material/Autocomplete";
 import { IconButton } from "@mui/material";
+import { LocationData } from "../Interfaces/SearchLocation";
+
 const LocationsSearch: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
-  const [locationsList, setLocationsList] = useState<any>([]);
+  const [locationsList, setLocationsList] = useState<LocationData[]>([]);
+  const [isInputValid, setIsInputValid] = useState(true);
 
   const dispatch = useAppDispatch();
 
@@ -20,10 +23,12 @@ const LocationsSearch: React.FC = () => {
     return () => clearTimeout(debounceTimer);
   }, [inputValue]);
 
-  const handleInputChange = (e: any) => {
-    setInputValue(e.target.value);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setInputValue(value);
+    // Validate input for English characters only
+    setIsInputValid(/^[a-zA-Z\s]*$/.test(value));
   };
-  //CHANGED Key to key
 
   const handleSelectChange = (
     event: React.ChangeEvent<{}>,
@@ -34,7 +39,6 @@ const LocationsSearch: React.FC = () => {
     }
   };
 
-  //CHANGED Key to key
   return (
     <div style={{ display: "flex" }}>
       <Autocomplete
@@ -43,24 +47,28 @@ const LocationsSearch: React.FC = () => {
         id="combo-box-demo"
         options={
           locationsList && locationsList.length > 0
-            ? locationsList.map((location) => {
-                return {
-                  // label: `${location.LocalizedName}`,
-                  label: `${location.LocalizedName}`,
-                  value: location.Key,
-                  id: location.Key,
-                  key: location.Key,
-                  country: location.Country.LocalizedName,
-                };
-              })
+            ? locationsList.map((location) => ({
+                label: `${location.LocalizedName}`,
+                value: location.Key,
+                id: location.Key,
+                key: location.Key,
+                country: location.Country.LocalizedName,
+              }))
             : []
         }
         sx={{ width: 300, display: "block", marginTop: "20px", marginBottom: "20px" }}
         onChange={handleSelectChange}
         isOptionEqualToValue={() => true}
-        onInputChange={(e) => handleInputChange(e)}
-        renderInput={(params) => <TextField {...params} label="Search" />}
-        noOptionsText="Search for a city!"
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Search"
+            error={!isInputValid} // Apply error state if input is not valid
+            helperText={!isInputValid ? "Only English characters are allowed" : undefined} // Error message
+            onChange={handleInputChange}
+          />
+        )}
+        noOptionsText={!isInputValid ? "Only English characters are allowed" : "Search for a city!"}
       />
       <IconButton onClick={() => handleGeolocationPermission(dispatch)}>
         <MyLocationIcon />

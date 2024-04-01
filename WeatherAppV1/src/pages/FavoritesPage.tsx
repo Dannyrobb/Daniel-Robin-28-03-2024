@@ -5,6 +5,7 @@ import NoFavoritesBox from "../components/NoFavoritesBox";
 import { useAppSelector } from "../state/store";
 import { SimpleWeatherCard } from "../components/SimpleWeatherCard";
 import { CircularProgress, Fade } from "@mui/material";
+
 const FavoritesPage: React.FC = () => {
   const [favoritesWeather, setFavoritesWeather] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -14,6 +15,7 @@ const FavoritesPage: React.FC = () => {
       try {
         const weatherData = await fetchFavoritesWeather(favorites.list);
         setFavoritesWeather(weatherData);
+
         setLoading(false);
       } catch (error) {
         console.error("Error fetching favorites weather:", error);

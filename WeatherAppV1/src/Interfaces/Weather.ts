@@ -51,3 +51,19 @@ export interface WeatherState {
   loading: boolean;
   error: string | null;
 }
+
+export interface FiveDayForecastDay {
+  dayOfWeek: string;
+  tempretures: {
+    Minimum: {
+      Value: number;
+      Unit: string;
+      UnitType: number;
+    };
+    Maximum: {
+      Value: number;
+      Unit: string;
+      UnitType: number;
+    };
+  };
+}

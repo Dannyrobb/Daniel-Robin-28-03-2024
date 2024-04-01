@@ -3,6 +3,8 @@ import { API_KEY, BASE_URL_GEOLOCATION } from "../../../config";
 import { GeoPositionResponse } from "../../Interfaces/GeoLocation";
 import { getGeoLocation } from "../helpers/helpers";
 import { fetchWeather } from "../../state/weatherSlice";
+import {} from "redux";
+
 export async function getGeoPosition(
   latitude: number,
   longitude: number
@@ -35,8 +37,6 @@ export function handleGeolocationPermission(dispatch) {
     return getGeoLocation()
       .then((data) => dispatch(fetchWeather(data.key, data.cityName, data.countryName)))
       .catch((e) => {
-        console.log(e);
-
         dispatch(fetchWeather("215854", "Tel Aviv", "Israel"));
       });
   } else if (geolocationPermissionGranted === "false") {
@@ -48,14 +48,13 @@ export function handleGeolocationPermission(dispatch) {
       return getGeoLocation()
         .then((data) => {
           dispatch(fetchWeather(data.key, data.cityName, data.countryName));
-          localStorage.setItem("geolocationPermission", true);
+          localStorage.setItem("geolocationPermission", "true");
         })
         .catch((e) => {
-          console.log(e);
           dispatch(fetchWeather("215854", "Tel Aviv", "Israel"));
         });
     } else {
-      localStorage.setItem("geolocationPermission", false);
+      localStorage.setItem("geolocationPermission", "false");
       dispatch(fetchWeather("215854", "Tel Aviv", "Israel"));
       return Promise.resolve();
     }
