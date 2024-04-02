@@ -3,10 +3,10 @@ import WeatherPage from "./pages/WeatherPage";
 import { Routes, Route } from "react-router-dom";
 import CustomAppBar from "./components/AppBar";
 import FavoritesPage from "./pages/FavoritesPage";
-
+import "./App.css";
 const App: React.FC = () => {
   return (
-    <div>
+    <div className="app">
       <CustomAppBar />
       <Routes>
         <Route path="/" element={<WeatherPage />} />

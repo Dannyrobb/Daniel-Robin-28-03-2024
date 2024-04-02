@@ -8,6 +8,7 @@ import { AppBar, Container, Toolbar, Typography, Button, Fade, MenuItem } from "
 import CloudQueueIcon from "@mui/icons-material/CloudQueue";
 import TemperatureToggle from "./TemperatureToggle";
 import { appBarStyles } from "../styles/styles";
+
 function CustomAppBar() {
   const location = useLocation();
   const [animate, setAnimate] = useState(false);
@@ -87,7 +88,6 @@ function CustomAppBar() {
                 </Button>
               )}
             </Box>
-
             <TemperatureToggle />
           </Toolbar>
         </Container>
