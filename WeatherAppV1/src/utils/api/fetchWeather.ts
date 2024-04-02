@@ -6,6 +6,8 @@ import { WeatherForecast } from "../../Interfaces/Weather";
 export const fetchCurrentWeather = async (locationKey: string, locationCity: string, locationCountry: string) => {
   try {
     const currentWeatherData = await fetchWeatherData(locationKey);
+    currentWeatherData.Temperature.Metric.Value = Math.round(currentWeatherData.Temperature.Metric.Value);
+
     const fiveDayForecastResponse = await axios.get(`${BASE_URL_FIVE_DAY_FORECAST}/${locationKey}?apikey=${API_KEY}&metric=true`);
 
     if (fiveDayForecastResponse.status !== 200) {

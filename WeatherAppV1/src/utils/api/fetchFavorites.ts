@@ -9,7 +9,7 @@ export const fetchFavoritesWeather = async (favorites: Favorite[]): Promise<Favo
         Key: favorite.Key,
         city: favorite.city,
         country: favorite.country,
-        temperature: currentWeatherData.Temperature.Metric.Value,
+        temperature: Math.round(currentWeatherData.Temperature.Metric.Value),
         weatherText: currentWeatherData.WeatherText,
         icon: currentWeatherData.WeatherIcon,
       };

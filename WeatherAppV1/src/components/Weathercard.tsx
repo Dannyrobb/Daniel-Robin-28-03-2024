@@ -34,7 +34,9 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperatu
             </Typography>
             <Typography sx={{ fontFamily: "inherit" }} variant="h5">
               {unit == "C"
-                ? `${fiveDayForecast[0].tempretures.Maximum.Value}°C / ${fiveDayForecast[0].tempretures.Minimum.Value}°C`
+                ? `${Math.round(fiveDayForecast[0].tempretures.Maximum.Value)}°C / ${Math.round(
+                    fiveDayForecast[0].tempretures.Minimum.Value
+                  )}°C`
                 : `${unitConverter(fiveDayForecast[0].tempretures.Maximum.Value)}°F / ${unitConverter(
                     fiveDayForecast[0].tempretures.Minimum.Value
                   )}°F`}
@@ -51,10 +53,14 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperatu
                     {day.dayOfWeek}
                   </Typography>
                   <Typography sx={{ fontFamily: "inherit" }} variant="body2">
-                    {unit == "C" ? `${day.tempretures.Maximum.Value}° max` : `${unitConverter(day.tempretures.Maximum.Value)}\° max`}
+                    {unit == "C"
+                      ? `${Math.round(day.tempretures.Maximum.Value)}° max`
+                      : `${unitConverter(day.tempretures.Maximum.Value)}\° max`}
                   </Typography>
                   <Typography sx={{ fontFamily: "inherit" }} variant="body2">
-                    {unit == "C" ? `${day.tempretures.Minimum.Value}° min` : `${unitConverter(day.tempretures.Minimum.Value)}\° min`}
+                    {unit == "C"
+                      ? `${Math.round(day.tempretures.Minimum.Value)}° min`
+                      : `${unitConverter(day.tempretures.Minimum.Value)}\° min`}
                   </Typography>
                 </Box>
               );
