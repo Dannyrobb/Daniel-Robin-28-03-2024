@@ -38,8 +38,15 @@ export const fetchWeather =
       const data = await fetchCurrentWeather(locationKey, locationCity, locationCountry);
 
       dispatch(fetchWeatherSuccess(data));
-    } catch (error) {
-      dispatch(fetchWeatherFailure(error.toString()));
+    } catch (error: unknown) {
+      if (typeof error === "string") {
+        dispatch(fetchWeatherFailure(error));
+      } else if (error instanceof Error) {
+        dispatch(fetchWeatherFailure(error.toString()));
+      } else {
+        // Handle other types of errors if necessary
+        dispatch(fetchWeatherFailure("An unknown error occurred"));
+      }
     }
   };
 
