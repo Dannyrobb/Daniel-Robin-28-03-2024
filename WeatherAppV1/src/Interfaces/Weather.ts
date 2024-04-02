@@ -2,6 +2,7 @@ export interface WeatherData {
   city: string;
   country: string;
   Key: string;
+  key: string;
   LocalObservationDateTime: string;
   EpochTime: number;
   Weather: {
