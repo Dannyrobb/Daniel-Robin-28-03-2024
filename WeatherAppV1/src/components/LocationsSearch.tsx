@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { fetchLocations } from "../utils/api/locationAutocomplete";
-import { TextField } from "@mui/material";
-import { fetchWeather } from "../state/weatherSlice";
-import { useAppDispatch } from "../state/store";
-import { handleGeolocationPermission } from "../utils/api/fetchGeolocation";
-import MyLocationIcon from "@mui/icons-material/MyLocation";
+import { TextField, IconButton, Box } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
-import { IconButton } from "@mui/material";
+import MyLocationIcon from "@mui/icons-material/MyLocation";
+import { useAppDispatch } from "../state/store";
+import { fetchLocations } from "../utils/api/locationAutocomplete";
+import { fetchWeather } from "../state/weatherSlice";
+import { handleGeolocationPermission } from "../utils/api/fetchGeolocation";
 import { LocationData } from "../Interfaces/SearchLocation";
 import { locationSearchStyles } from "../styles/styles";
-import { Box } from "@mui/material";
-import { useAppSelector } from "../state/store";
+
 const LocationsSearch: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
   const [locationsList, setLocationsList] = useState<LocationData[]>([]);
   const [isInputValid, setIsInputValid] = useState(true);
-  const darkMode = useAppSelector((state) => state.darkMode);
 
   const dispatch = useAppDispatch();
 
@@ -74,7 +71,7 @@ const LocationsSearch: React.FC = () => {
         noOptionsText={!isInputValid ? "Only English characters are allowed" : "Search for a city!"}
       />
       <IconButton onClick={() => handleGeolocationPermission(dispatch)}>
-        <MyLocationIcon sx={{ color: darkMode ? "white" : "black" }} />
+        <MyLocationIcon />
       </IconButton>
     </Box>
   );

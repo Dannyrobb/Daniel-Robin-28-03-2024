@@ -3,7 +3,6 @@ import { API_KEY, BASE_URL_GEOLOCATION } from "../../../config";
 import { GeoPositionResponse } from "../../Interfaces/GeoLocation";
 import { getGeoLocation } from "../helpers/helpers";
 import { fetchWeather } from "../../state/weatherSlice";
-import {} from "redux";
 
 export async function getGeoPosition(
   latitude: number,

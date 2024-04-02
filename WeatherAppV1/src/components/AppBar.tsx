@@ -1,18 +1,15 @@
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { AppBar, Container, Toolbar, Typography, Button, Fade, MenuItem } from "@mui/material";
-import CloudQueueIcon from "@mui/icons-material/CloudQueue";
-import TemperatureToggle from "./TemperatureToggle";
-import { appBarStyles } from "../styles/styles";
-import DarkModeToggle from "./DarkMode";
 import { useSelector } from "react-redux";
 import { RootState } from "../state/store";
-import { Stack } from "@mui/material";
-function CustomAppBar() {
+import { AppBar, Box, Button, Container, Fade, IconButton, MenuItem, Stack, Toolbar, Typography, Menu } from "@mui/material";
+import CloudQueueIcon from "@mui/icons-material/CloudQueue";
+import MenuIcon from "@mui/icons-material/Menu";
+import TemperatureToggle from "./TemperatureToggle";
+import DarkModeToggle from "./DarkMode";
+import { appBarStyles } from "../styles/styles";
+
+const CustomAppBar: React.FC = () => {
   const location = useLocation();
   const [animate, setAnimate] = useState(false);
   const darkMode = useSelector((state: RootState) => state.darkMode.darkMode);
@@ -25,7 +22,7 @@ function CustomAppBar() {
     return () => clearTimeout(timer);
   }, []);
 
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -113,5 +110,6 @@ function CustomAppBar() {
       </AppBar>
     </Fade>
   );
-}
+};
+
 export default CustomAppBar;

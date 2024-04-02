@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// Define a key for storing the dark mode preference in localStorage
 const DARK_MODE_STORAGE_KEY = "darkMode";
 
 const getDarkModePreference = (): boolean => {
