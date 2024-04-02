@@ -18,6 +18,9 @@ export interface WeatherData {
   MobileLink: string;
   Link: string;
   fiveDayForecast: WeatherForecast[];
+  WeatherIcon: number;
+  WeatherText: string;
+  Temperature: any;
 }
 
 export interface WeatherForecast {

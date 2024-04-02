@@ -31,7 +31,7 @@ const LocationsSearch: React.FC = () => {
   };
 
   const handleSelectChange = (
-    event: React.ChangeEvent<{}>,
+    _event: React.ChangeEvent<{}>,
     value: { label: string; value: string; id: string; country: string } | null
   ) => {
     if (value) {

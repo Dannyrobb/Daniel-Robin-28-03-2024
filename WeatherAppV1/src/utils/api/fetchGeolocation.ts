@@ -29,12 +29,12 @@ export async function getGeoPosition(
   }
 }
 
-export function handleGeolocationPermission(dispatch) {
+export function handleGeolocationPermission(dispatch: any) {
   const geolocationPermissionGranted: string | null = localStorage.getItem("geolocationPermission");
   if (geolocationPermissionGranted === "true") {
     return getGeoLocation()
       .then((data) => dispatch(fetchWeather(data.key, data.cityName, data.countryName)))
-      .catch((e) => {
+      .catch((_e) => {
         dispatch(fetchWeather("215854", "Tel Aviv", "Israel"));
       });
   } else if (geolocationPermissionGranted === "false" || "null") {
@@ -45,7 +45,7 @@ export function handleGeolocationPermission(dispatch) {
           dispatch(fetchWeather(data.key, data.cityName, data.countryName));
           localStorage.setItem("geolocationPermission", "true");
         })
-        .catch((e) => {
+        .catch((_e) => {
           dispatch(fetchWeather("215854", "Tel Aviv", "Israel"));
         });
     } else {

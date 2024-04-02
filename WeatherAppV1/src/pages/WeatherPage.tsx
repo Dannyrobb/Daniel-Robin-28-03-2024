@@ -27,7 +27,7 @@ const WeatherPage: React.FC = () => {
           country={weather.data.country}
           temperature={weather.data.Temperature}
           fiveDayForecast={weather.data.fiveDayForecast}
-          Key={weather.data.key}
+          Key={weather.data.Key}
           WeatherIcon={weather.data.WeatherIcon}
           WeatherText={weather.data.WeatherText}
         />
