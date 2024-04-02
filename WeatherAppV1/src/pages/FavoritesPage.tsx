@@ -5,11 +5,11 @@ import NoFavoritesBox from "../components/NoFavoritesBox";
 import { useAppSelector } from "../state/store";
 import { SimpleWeatherCard } from "../components/SimpleWeatherCard";
 import { CircularProgress, Fade } from "@mui/material";
-
 const FavoritesPage: React.FC = () => {
   const [favoritesWeather, setFavoritesWeather] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const favorites = useAppSelector((state) => state.favorites);
+  const darkMode = useAppSelector((state) => state.darkMode);
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
@@ -27,10 +27,10 @@ const FavoritesPage: React.FC = () => {
 
   return (
     <Container>
-      <Grid container spacing={3} justifyContent="center" alignItems="center">
+      <Grid container spacing={3} justifyContent="center" alignItems="center" sx={{ color: darkMode.darkMode ? "white" : "black" }}>
         <Grid item xs={12}>
           <Fade in={true} timeout={444}>
-            <Typography sx={{ fontSize: { xs: "50px", md: "75px" } }} align="center" gutterBottom color={"#213547"}>
+            <Typography sx={{ fontSize: { xs: "50px", md: "75px" }, color: "inherit" }} align="center" gutterBottom>
               Favorites
             </Typography>
           </Fade>

@@ -10,10 +10,12 @@ import { IconButton } from "@mui/material";
 import { LocationData } from "../Interfaces/SearchLocation";
 import { locationSearchStyles } from "../styles/styles";
 import { Box } from "@mui/material";
+import { useAppSelector } from "../state/store";
 const LocationsSearch: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
   const [locationsList, setLocationsList] = useState<LocationData[]>([]);
   const [isInputValid, setIsInputValid] = useState(true);
+  const darkMode = useAppSelector((state) => state.darkMode);
 
   const dispatch = useAppDispatch();
 
@@ -57,7 +59,6 @@ const LocationsSearch: React.FC = () => {
               }))
             : []
         }
-        // { width: 300, display: "block", marginTop: "20px", marginBottom: "20px" }
         sx={locationSearchStyles.autocomplete}
         onChange={handleSelectChange}
         isOptionEqualToValue={() => true}
@@ -73,7 +74,7 @@ const LocationsSearch: React.FC = () => {
         noOptionsText={!isInputValid ? "Only English characters are allowed" : "Search for a city!"}
       />
       <IconButton onClick={() => handleGeolocationPermission(dispatch)}>
-        <MyLocationIcon />
+        <MyLocationIcon sx={{ color: darkMode ? "white" : "black" }} />
       </IconButton>
     </Box>
   );

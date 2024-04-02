@@ -8,10 +8,14 @@ import { AppBar, Container, Toolbar, Typography, Button, Fade, MenuItem } from "
 import CloudQueueIcon from "@mui/icons-material/CloudQueue";
 import TemperatureToggle from "./TemperatureToggle";
 import { appBarStyles } from "../styles/styles";
-
+import DarkModeToggle from "./DarkMode";
+import { useSelector } from "react-redux";
+import { RootState } from "../state/store";
+import { Stack } from "@mui/material";
 function CustomAppBar() {
   const location = useLocation();
   const [animate, setAnimate] = useState(false);
+  const darkMode = useSelector((state: RootState) => state.darkMode.darkMode);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -34,13 +38,21 @@ function CustomAppBar() {
   return (
     <Fade in={animate} timeout={1000}>
       <AppBar position="static" sx={appBarStyles.appBar}>
-        <Container>
+        <Container sx={{ color: darkMode ? "white" : "black" }}>
           <Toolbar disableGutters>
             <CloudQueueIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-
-            <Typography variant="h5" noWrap component={Link} to="/" sx={appBarStyles.logoText}>
+            <Typography variant="h5" noWrap sx={appBarStyles.logoText}>
               WeatherHub
             </Typography>
+            {location.pathname !== "/" && (
+              <Stack direction="row" spacing={1} sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "flex-end" }}>
+                <Button component={Link} to="/" color="inherit" sx={appBarStyles.button} onClick={handleCloseNavMenu}>
+                  Home
+                </Button>
+                <TemperatureToggle />
+                <DarkModeToggle />
+              </Stack>
+            )}
             <Box sx={appBarStyles.menuButton}>
               <IconButton size="large" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="inherit">
                 <MenuIcon />
@@ -78,17 +90,24 @@ function CustomAppBar() {
                     </Button>
                   </MenuItem>
                 )}
+                <MenuItem sx={{ display: "flex", justifyContent: "center" }}>
+                  <TemperatureToggle />
+                </MenuItem>
+                <MenuItem sx={{ display: "flex", justifyContent: "center" }}>
+                  <DarkModeToggle />
+                </MenuItem>
               </Menu>
             </Box>
 
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {location.pathname !== "/favorites" && (
+            {location.pathname !== "/favorites" && (
+              <Stack direction="row" spacing={1} sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "flex-end" }}>
                 <Button component={Link} to="/favorites" color="inherit" sx={appBarStyles.button} onClick={handleCloseNavMenu}>
                   Favorites
                 </Button>
-              )}
-            </Box>
-            <TemperatureToggle />
+                <TemperatureToggle />
+                <DarkModeToggle />
+              </Stack>
+            )}
           </Toolbar>
         </Container>
       </AppBar>

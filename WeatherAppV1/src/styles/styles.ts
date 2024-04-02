@@ -28,7 +28,7 @@ export const simpleWeatherCardStyle = (weatherText: string) => ({
   }')`,
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
-  color: "white",
+  color: "inherit",
   margin: "30px",
 });
 
@@ -68,6 +68,7 @@ export const weathercardStyles = {
     paddingTop: { xs: "30px", md: "60px" },
     paddingLeft: { xs: "30px", md: "60px" },
     position: "relative",
+    color: "inherit",
   },
 
   tempretureContainer: {
@@ -102,7 +103,7 @@ export const weathercardStyles = {
     minHeight: { sm: "350px", md: "450px" },
     borderRadius: "20px",
     m: "20px",
-    color: "white",
+    color: "inherit",
     boxShadow: "10",
     fontFamily: "monospace",
   }),

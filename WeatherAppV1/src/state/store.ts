@@ -3,12 +3,14 @@ import weatherReducer from "./weatherSlice";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import favortiesSlice from "./favortiesSlice";
 import toggleUnitSwitch from "./toggleUnitSwitchSlice";
+import darkModeReducer from "./darkmodeSlice";
 
 const store = configureStore({
   reducer: {
     weather: weatherReducer,
     favorites: favortiesSlice,
     temperature: toggleUnitSwitch,
+    darkMode: darkModeReducer,
   },
 });
 

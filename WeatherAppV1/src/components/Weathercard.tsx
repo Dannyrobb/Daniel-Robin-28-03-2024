@@ -17,7 +17,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperatu
             <Box sx={weathercardStyles.favoritesStar}>
               <FavoriteStar weatherDetails={{ Key, city, country }} />
             </Box>
-            <Typography variant="h4" sx={{ fontFamily: "inherit" }}>{`${city}, ${country}`}</Typography>
+            <Typography variant="h4" sx={{ fontFamily: "inherit", color: "inherit" }}>{`${city}, ${country}`}</Typography>
             <Typography variant="body1" sx={{ fontFamily: "inherit" }}>
               {getCurrentDate()}
             </Typography>
@@ -29,7 +29,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperatu
         </Grid>
         <Grid item xs={12} sm={6}>
           <Box sx={weathercardStyles.tempretureContainer}>
-            <Typography variant="h1" sx={{ fontFamily: "inherit" }}>
+            <Typography sx={{ fontFamily: "inherit", fontSize: "80px" }}>
               {unit == "C" ? `${temperature.Metric.Value}°C` : `${temperature.Imperial.Value}°F`}
             </Typography>
             <Typography sx={{ fontFamily: "inherit" }} variant="h5">
