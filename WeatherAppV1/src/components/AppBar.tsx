@@ -7,6 +7,7 @@ import { Link, useLocation } from "react-router-dom";
 import { AppBar, Container, Toolbar, Typography, Button, Fade, MenuItem } from "@mui/material";
 import CloudQueueIcon from "@mui/icons-material/CloudQueue";
 import TemperatureToggle from "./TemperatureToggle";
+import { appBarStyles } from "../styles/styles";
 function CustomAppBar() {
   const location = useLocation();
   const [animate, setAnimate] = useState(false);
@@ -31,29 +32,15 @@ function CustomAppBar() {
 
   return (
     <Fade in={animate} timeout={1000}>
-      <AppBar position="static" sx={{ bgcolor: "transparent", boxShadow: "none" }}>
+      <AppBar position="static" sx={appBarStyles.appBar}>
         <Container>
           <Toolbar disableGutters>
             <CloudQueueIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
 
-            <Typography
-              variant="h5"
-              noWrap
-              component={Link}
-              to="/"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
+            <Typography variant="h5" noWrap component={Link} to="/" sx={appBarStyles.logoText}>
               WeatherHub
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <Box sx={appBarStyles.menuButton}>
               <IconButton size="large" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="inherit">
                 <MenuIcon />
               </IconButton>
@@ -77,20 +64,7 @@ function CustomAppBar() {
               >
                 {location.pathname !== "/" && (
                   <MenuItem>
-                    <Button
-                      onClick={handleCloseNavMenu}
-                      component={Link}
-                      to="/"
-                      color="inherit"
-                      sx={{
-                        display: { xs: "flex" },
-
-                        fontSize: "1.2rem",
-                        fontWeight: "bold",
-                        fontFamily: "Bebas Neue, Arial",
-                        textTransform: "capitalize",
-                      }}
-                    >
+                    <Button onClick={handleCloseNavMenu} component={Link} to="/" color="inherit" sx={appBarStyles.menuItem}>
                       Home
                     </Button>
                   </MenuItem>
@@ -98,20 +72,7 @@ function CustomAppBar() {
 
                 {location.pathname !== "/favorites" && (
                   <MenuItem>
-                    <Button
-                      onClick={handleCloseNavMenu}
-                      component={Link}
-                      to="/favorites"
-                      color="inherit"
-                      sx={{
-                        display: { xs: "flex" },
-                        marginLeft: "auto",
-                        fontSize: "1.2rem",
-                        fontFamily: "Bebas Neue, Arial",
-                        fontWeight: "bold",
-                        textTransform: "capitalize",
-                      }}
-                    >
+                    <Button onClick={handleCloseNavMenu} component={Link} to="/favorites" color="inherit" sx={appBarStyles.button}>
                       Favorites
                     </Button>
                   </MenuItem>
@@ -121,20 +82,7 @@ function CustomAppBar() {
 
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {location.pathname !== "/favorites" && (
-                <Button
-                  component={Link}
-                  to="/favorites"
-                  color="inherit"
-                  sx={{
-                    display: { xs: "flex" },
-                    marginLeft: "auto",
-                    fontSize: "1.2rem",
-                    fontFamily: "Bebas Neue, Arial",
-                    textTransform: "capitalize",
-                    mr: "20px",
-                  }}
-                  onClick={handleCloseNavMenu}
-                >
+                <Button component={Link} to="/favorites" color="inherit" sx={appBarStyles.button} onClick={handleCloseNavMenu}>
                   Favorites
                 </Button>
               )}

@@ -6,7 +6,7 @@ import FavoriteStar from "./FavoriteStar";
 import { unitConverter } from "../utils/helpers/helpers";
 import { Fade, Button } from "@mui/material";
 import { SimpleWeatherCardData } from "../Interfaces/Favorites";
-
+import { simpleWeatherCardStyle } from "../styles/styles";
 export const SimpleWeatherCard = ({ favorite }: { favorite: SimpleWeatherCardData }) => {
   const unit = useAppSelector((state) => state.temperature.unit);
 
@@ -20,37 +20,13 @@ export const SimpleWeatherCard = ({ favorite }: { favorite: SimpleWeatherCardDat
 
   return (
     <Fade in={true} timeout={700}>
-      <Grid item xs={12} md={6} lg={4}>
-        <Paper
-          elevation={3}
-          style={{
-            padding: "20px",
-            borderRadius: "10px",
-            height: "auto",
-            minHeight: "300px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "space-around",
-
-            backgroundImage: `url('${
-              favorite.weatherText.toLowerCase().includes("rain")
-                ? "/Images/rainy.jpg"
-                : favorite.weatherText.toLowerCase().includes("sun")
-                ? "/Images/sunny.jpg"
-                : "/Images/IMG_8777.jpeg"
-            }')`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-            color: "white",
-            margin: "30px",
-          }}
-        >
+      <Grid item xs={12} md={6} lg={4} sx={{ fontFamily: "monospace" }}>
+        <Paper elevation={3} sx={simpleWeatherCardStyle(favorite.weatherText)}>
           <Button
             onClick={() => handleRedirectOnClick(favorite.Key, favorite.city, favorite.country)}
             sx={{ color: "inherit", textTransform: "capitalize" }}
           >
-            <Typography variant="h4" sx={{ fontFamily: "monospace", color: "inherit" }}>
+            <Typography variant="h4" sx={{ fontFamily: "inerit", color: "inherit" }}>
               {favorite.city}, {favorite.country}
             </Typography>
           </Button>
@@ -58,12 +34,12 @@ export const SimpleWeatherCard = ({ favorite }: { favorite: SimpleWeatherCardDat
           {favorite.loading ? (
             <CircularProgress color="inherit" size={60} />
           ) : (
-            <Typography variant="h5" sx={{ fontFamily: "monospace" }}>
+            <Typography variant="h5" sx={{ fontFamily: "inerit" }}>
               {unit == "C" ? `${favorite.temperature}°C` : `${unitConverter(favorite.temperature)}°F`}
             </Typography>
           )}
 
-          <Typography variant="body1" gutterBottom sx={{ fontFamily: "monospace" }}>
+          <Typography variant="body1" gutterBottom sx={{ fontFamily: "inerit" }}>
             {favorite.weatherText}
           </Typography>
           <img src={`/icons/${favorite.icon}.png`} />

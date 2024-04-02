@@ -8,7 +8,8 @@ import MyLocationIcon from "@mui/icons-material/MyLocation";
 import Autocomplete from "@mui/material/Autocomplete";
 import { IconButton } from "@mui/material";
 import { LocationData } from "../Interfaces/SearchLocation";
-
+import { locationSearchStyles } from "../styles/styles";
+import { Box } from "@mui/material";
 const LocationsSearch: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
   const [locationsList, setLocationsList] = useState<LocationData[]>([]);
@@ -40,7 +41,7 @@ const LocationsSearch: React.FC = () => {
   };
 
   return (
-    <div style={{ display: "flex" }}>
+    <Box sx={locationSearchStyles.container}>
       <Autocomplete
         disablePortal
         disableClearable
@@ -56,7 +57,8 @@ const LocationsSearch: React.FC = () => {
               }))
             : []
         }
-        sx={{ width: 300, display: "block", marginTop: "20px", marginBottom: "20px" }}
+        // { width: 300, display: "block", marginTop: "20px", marginBottom: "20px" }
+        sx={locationSearchStyles.autocomplete}
         onChange={handleSelectChange}
         isOptionEqualToValue={() => true}
         renderInput={(params) => (
@@ -73,7 +75,7 @@ const LocationsSearch: React.FC = () => {
       <IconButton onClick={() => handleGeolocationPermission(dispatch)}>
         <MyLocationIcon />
       </IconButton>
-    </div>
+    </Box>
   );
 };
 
