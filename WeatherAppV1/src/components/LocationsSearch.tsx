@@ -9,7 +9,7 @@ import { handleGeolocationPermission } from "../utils/api/fetchGeolocation";
 import { LocationData } from "../Interfaces/SearchLocation";
 import { locationSearchStyles } from "../styles/styles";
 
-const LocationsSearch: React.FC = () => {
+const LocationsSearch: React.FC = (): JSX.Element => {
   const [inputValue, setInputValue] = useState("");
   const [locationsList, setLocationsList] = useState<LocationData[]>([]);
   const [isInputValid, setIsInputValid] = useState(true);

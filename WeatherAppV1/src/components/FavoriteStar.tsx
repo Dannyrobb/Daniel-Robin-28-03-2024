@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFavorite, removeFavorite, selectFavorites } from "../state/favortiesSlice";
 import { Favorite, FavoriteStarProps } from "../Interfaces/Favorites";
 
-const FavoriteStar: React.FC<FavoriteStarProps> = ({ weatherDetails }) => {
+const FavoriteStar: React.FC<FavoriteStarProps> = ({ weatherDetails }): JSX.Element => {
   const dispatch = useDispatch();
   const favoritesArray: Favorite[] = useSelector(selectFavorites);
   const { Key, city, country } = weatherDetails;

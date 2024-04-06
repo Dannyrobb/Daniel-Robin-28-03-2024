@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 
 import { noFavoritesStyles } from "../styles/styles";
-const NoFavoritesBox = () => {
+const NoFavoritesBox = (): JSX.Element => {
   return (
     <Box sx={noFavoritesStyles.noFavoritesContainer}>
       <Typography variant="h5" sx={{ fontFamily: "Bebas Neue, Arial", marginBottom: "20px" }}>

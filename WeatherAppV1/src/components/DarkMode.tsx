@@ -15,7 +15,7 @@ const StyledSwitch = styled(Switch)({
   },
 });
 
-const DarkModeToggle: React.FC = () => {
+const DarkModeToggle: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
   const darkMode = useSelector((state: RootState) => state.darkMode.darkMode);
 
