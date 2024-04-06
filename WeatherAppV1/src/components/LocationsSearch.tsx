@@ -1,14 +1,18 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
-import { fetchLocations } from "../utils/api/locationAutocomplete";
-import { TextField, Box, Grid } from "@mui/material";
-import { fetchWeather } from "../state/weatherSlice";
-import { useAppDispatch, useAppSelector } from "../state/store";
-
+import React, { useState, useEffect } from "react";
+import { TextField, IconButton, Box } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
+import MyLocationIcon from "@mui/icons-material/MyLocation";
+import { useAppDispatch } from "../state/store";
+import { fetchLocations } from "../utils/api/locationAutocomplete";
+import { fetchWeather } from "../state/weatherSlice";
+import { handleGeolocationPermission } from "../utils/api/fetchGeolocation";
+import { LocationData } from "../Interfaces/SearchLocation";
+import { locationSearchStyles } from "../styles/styles";
 
 const LocationsSearch: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
-  const [locationsList, setLocationsList] = useState<any>([]);
+  const [locationsList, setLocationsList] = useState<LocationData[]>([]);
+  const [isInputValid, setIsInputValid] = useState(true);
 
   const dispatch = useAppDispatch();
 
@@ -16,65 +20,60 @@ const LocationsSearch: React.FC = () => {
     const debounceTimer = setTimeout(async () => {
       setLocationsList(await fetchLocations(inputValue));
     }, 300);
-    // Cleanup function to clear the timer on component unmount and on each input change
     return () => clearTimeout(debounceTimer);
   }, [inputValue]);
 
-  const handleInputChange = (e: any) => {
-    console.log("input");
-    setInputValue(e.target.value);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setInputValue(value);
+
+    setIsInputValid(/^[a-zA-Z\s]*$/.test(value));
   };
-  // const func = async () => {
-  //   const res = await fetchLocations(inputValue);
-  //   console.log(res);
-  // };
-  // func();
-  // useEffect(() => {
-  //   const fetchLocationsAsync = async () => {
-  //     try {
-  //       const data = await fetchLocations(inputValue);
-  //       setLocationsList(data);
-  //     } catch (error) {
-  //       console.error("Error fetching locations:", error);
-  //       // Handle errors here
-  //     }
-  //   };
 
-  //   const debounceTimer = setTimeout(fetchLocationsAsync, 300);
-
-  //   return () => clearTimeout(debounceTimer);
-  // }, [inputValue]);
   const handleSelectChange = (
-    event: React.ChangeEvent<{}>,
-    value: { label: string; value: string; Key: string; country: string } | null
+    _event: React.ChangeEvent<{}>,
+    value: { label: string; value: string; id: string; country: string } | null
   ) => {
     if (value) {
-      console.log("Selected Location Key:", value.value);
-      console.log("Selected Location Label:", value.label);
-      console.log(value.country);
-      console.log(value);
-      dispatch(fetchWeather(value.Key, value.label, value.country));
+      dispatch(fetchWeather(value.id, value.label, value.country));
     }
   };
+
   return (
-    <Autocomplete
-      disablePortal
-      id="combo-box-demo"
-      options={
-        locationsList && locationsList.length > 0
-          ? locationsList.map((location) => ({
-              label: `${location.LocalizedName}`,
-              value: location.Key,
-              Key: location.Key,
-              country: location.Country.LocalizedName,
-            }))
-          : []
-      }
-      sx={{ width: 300, display: "block", marginTop: "20px", marginBottom: "20px" }}
-      onChange={handleSelectChange}
-      onInputChange={(e) => handleInputChange(e)}
-      renderInput={(params) => <TextField {...params} label="City" />}
-    />
+    <Box sx={locationSearchStyles.container}>
+      <Autocomplete
+        disablePortal
+        disableClearable
+        id="combo-box-demo"
+        options={
+          locationsList && locationsList.length > 0
+            ? locationsList.map((location) => ({
+                label: `${location.LocalizedName}`,
+                value: location.Key,
+                id: location.Key,
+                key: location.Key,
+                country: location.Country.LocalizedName,
+              }))
+            : []
+        }
+        sx={locationSearchStyles.autocomplete}
+        onChange={handleSelectChange}
+        isOptionEqualToValue={() => true}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Search"
+            error={!isInputValid}
+            helperText={!isInputValid ? "Only English characters are allowed" : undefined}
+            onChange={handleInputChange}
+          />
+        )}
+        noOptionsText={!isInputValid ? "Only English characters are allowed" : "Search for a city!"}
+      />
+      <IconButton onClick={() => handleGeolocationPermission(dispatch)}>
+        <MyLocationIcon />
+      </IconButton>
+    </Box>
   );
 };
 

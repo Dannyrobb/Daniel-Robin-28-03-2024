@@ -1,43 +1,12 @@
 import axios from "axios";
 import { BASE_URL_CURRENT_WEATHER, BASE_URL_FIVE_DAY_FORECAST, API_KEY } from "../../../config";
-import { epochTimeConverter } from "../helpers/epochTImeConverter";
+import { epochTimeConverter } from "../helpers/helpers";
+import { WeatherForecast } from "../../Interfaces/Weather";
+
 export const fetchCurrentWeather = async (locationKey: string, locationCity: string, locationCountry: string) => {
-  interface WeatherForecast {
-    Date: string;
-    Day: {
-      Icon: number;
-      IconPhrase: string;
-      HasPrecipitation: boolean;
-    };
-    EpochDate: number;
-    Link: string;
-    MobileLink: string;
-    Night: {
-      Icon: number;
-      IconPhrase: string;
-      HasPrecipitation: boolean;
-    };
-    Sources: string[];
-    Temperature: {
-      Maximum: {
-        Value: number;
-        Unit: string;
-        UnitType: number;
-      };
-      Minimum: {
-        Value: number;
-        Unit: string;
-        UnitType: number;
-      };
-    };
-  }
-
   try {
-    const currentWeatherResponse = await axios.get(`${BASE_URL_CURRENT_WEATHER}/${locationKey}?apikey=${API_KEY}`);
-
-    if (currentWeatherResponse.status !== 200) {
-      throw new Error(`Failed to fetch current weather data. Status: ${currentWeatherResponse.status}`);
-    }
+    const currentWeatherData = await fetchWeatherData(locationKey);
+    currentWeatherData.Temperature.Metric.Value = Math.round(currentWeatherData.Temperature.Metric.Value);
 
     const fiveDayForecastResponse = await axios.get(`${BASE_URL_FIVE_DAY_FORECAST}/${locationKey}?apikey=${API_KEY}&metric=true`);
 
@@ -45,10 +14,7 @@ export const fetchCurrentWeather = async (locationKey: string, locationCity: str
       throw new Error(`Failed to fetch five day forecast data. Status: ${fiveDayForecastResponse.status}`);
     }
 
-    const currentWeatherData = currentWeatherResponse.data[0];
     const fiveDayForecastData = fiveDayForecastResponse.data.DailyForecasts.map((forcast: WeatherForecast) => {
-      console.log("Function");
-      console.log(fiveDayForecastResponse.data.DailyForecasts);
       return { dayOfWeek: epochTimeConverter(forcast.EpochDate), tempretures: forcast.Temperature };
     });
 
@@ -65,4 +31,14 @@ export const fetchCurrentWeather = async (locationKey: string, locationCity: str
     console.error("Error fetching location data:", error);
     throw error;
   }
+};
+
+export const fetchWeatherData = async (locationKey: string) => {
+  const response = await axios.get(`${BASE_URL_CURRENT_WEATHER}/${locationKey}?apikey=${API_KEY}`);
+
+  if (response.status !== 200) {
+    throw new Error(`Failed to fetch current weather data. Status: ${response.status}`);
+  }
+
+  return response.data[0];
 };

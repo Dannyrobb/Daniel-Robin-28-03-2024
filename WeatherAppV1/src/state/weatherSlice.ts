@@ -1,40 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppThunk, RootState } from "./store";
 import { fetchCurrentWeather } from "../utils/api/fetchWeather";
-
-interface WeatherData {
-  LocalObservationDateTime: string;
-  EpochTime: number;
-  WeatherText: string;
-  WeatherIcon: number;
-  HasPrecipitation: boolean;
-  PrecipitationType: string;
-  IsDayTime: boolean;
-  Temperature: {
-    Metric: {
-      Value: number;
-      Unit: string;
-      UnitType: number;
-    };
-    Imperial: {
-      Value: number;
-      Unit: string;
-      UnitType: number;
-    };
-  };
-  MobileLink: string;
-  Link: string;
-  city: string;
-  country: string;
-  Key: string;
-  fiveDayForecast: [];
-}
-
-interface WeatherState {
-  data: WeatherData | null;
-  loading: boolean;
-  error: string | null;
-}
+import { WeatherData, WeatherState } from "../Interfaces/Weather";
 
 const initialState: WeatherState = {
   data: null,
@@ -70,10 +37,16 @@ export const fetchWeather =
     try {
       const data = await fetchCurrentWeather(locationKey, locationCity, locationCountry);
 
-      console.log(data);
       dispatch(fetchWeatherSuccess(data));
-    } catch (error) {
-      dispatch(fetchWeatherFailure(error.toString()));
+    } catch (error: unknown) {
+      if (typeof error === "string") {
+        dispatch(fetchWeatherFailure(error));
+      } else if (error instanceof Error) {
+        dispatch(fetchWeatherFailure(error.toString()));
+      } else {
+        // Handle other types of errors if necessary
+        dispatch(fetchWeatherFailure("An unknown error occurred"));
+      }
     }
   };
 

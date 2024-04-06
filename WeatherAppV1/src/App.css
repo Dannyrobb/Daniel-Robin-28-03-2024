@@ -1,10 +1,31 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  /* max-width: 1280px; */
+
   text-align: center;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  display: block;
+  background-image: url(/Images/background.jpg);
+  /* min-height: 150vh; */
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
+.dark-mode {
+  background-image: url(/Images/rainy.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #ffffff !important;
+}
+
+/* .light-mode {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+} */
+
+/* .light-mode {
+} */
 .logo {
   height: 6em;
   padding: 1.5em;

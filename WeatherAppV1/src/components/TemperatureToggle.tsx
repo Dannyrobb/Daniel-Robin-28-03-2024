@@ -12,7 +12,7 @@ const TemperatureToggle: React.FC = () => {
 
   return (
     <IconButton onClick={handleClick} color="inherit" aria-label="toggle theme">
-      {unit === "C" ? "C" : "F"}
+      {unit === "C" ? "°C" : "°F"}
     </IconButton>
   );
 };

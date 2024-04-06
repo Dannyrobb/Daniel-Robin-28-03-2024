@@ -1,34 +1,28 @@
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import LightModeIcon from "@mui/icons-material/LightMode";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { AppBar, Container, Toolbar, Typography, Button, Fade, MenuItem } from "@mui/material";
+import { useSelector } from "react-redux";
+import { RootState } from "../state/store";
+import { AppBar, Box, Button, Container, Fade, IconButton, MenuItem, Stack, Toolbar, Typography, Menu } from "@mui/material";
 import CloudQueueIcon from "@mui/icons-material/CloudQueue";
-import { toggleDarkMode } from "../state/themeSlice"; // Import action creator
-import { useAppDispatch, useAppSelector } from "../state/store";
+import MenuIcon from "@mui/icons-material/Menu";
 import TemperatureToggle from "./TemperatureToggle";
-function CustomAppBar() {
+import DarkModeToggle from "./DarkMode";
+import { appBarStyles } from "../styles/styles";
+
+const CustomAppBar: React.FC = () => {
   const location = useLocation();
   const [animate, setAnimate] = useState(false);
-  const darkMode = useAppSelector((state) => state.theme.darkMode);
-  const dispatch = useAppDispatch();
-  const handleToggleTheme = () => {
-    dispatch(toggleDarkMode()); // Dispatch action to toggle dark mode
-  };
+  const darkMode = useSelector((state: RootState) => state.darkMode.darkMode);
+
   useEffect(() => {
-    // Trigger animation by setting animate state to true after a short delay
     const timer = setTimeout(() => {
       setAnimate(true);
     }, 100);
 
-    return () => clearTimeout(timer); // Cleanup timer
+    return () => clearTimeout(timer);
   }, []);
 
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -40,37 +34,24 @@ function CustomAppBar() {
 
   return (
     <Fade in={animate} timeout={1000}>
-      <AppBar position="static" sx={{ bgcolor: "transparent", boxShadow: "none" }}>
-        <Container>
+      <AppBar position="static" sx={appBarStyles.appBar}>
+        <Container sx={{ color: darkMode ? "white" : "black" }}>
           <Toolbar disableGutters>
             <CloudQueueIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-
-            <Typography
-              variant="h5"
-              noWrap
-              component={Link}
-              to="/"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
+            <Typography variant="h5" noWrap sx={appBarStyles.logoText}>
               WeatherHub
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
+            {location.pathname !== "/" && (
+              <Stack direction="row" spacing={1} sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "flex-end" }}>
+                <Button component={Link} to="/" color="inherit" sx={appBarStyles.button} onClick={handleCloseNavMenu}>
+                  Home
+                </Button>
+                <TemperatureToggle />
+                <DarkModeToggle />
+              </Stack>
+            )}
+            <Box sx={appBarStyles.menuButton}>
+              <IconButton size="large" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="inherit">
                 <MenuIcon />
               </IconButton>
               <Menu
@@ -93,20 +74,7 @@ function CustomAppBar() {
               >
                 {location.pathname !== "/" && (
                   <MenuItem>
-                    <Button
-                      onClick={handleCloseNavMenu}
-                      component={Link}
-                      to="/"
-                      color="inherit"
-                      sx={{
-                        display: { xs: "flex" },
-                        // marginLeft: "auto",
-                        fontSize: "1.2rem",
-                        fontWeight: "bold",
-                        fontFamily: "Bebas Neue, Arial",
-                        textTransform: "capitalize",
-                      }}
-                    >
+                    <Button onClick={handleCloseNavMenu} component={Link} to="/" color="inherit" sx={appBarStyles.menuItem}>
                       Home
                     </Button>
                   </MenuItem>
@@ -114,57 +82,34 @@ function CustomAppBar() {
 
                 {location.pathname !== "/favorites" && (
                   <MenuItem>
-                    <Button
-                      onClick={handleCloseNavMenu}
-                      component={Link}
-                      to="/favorites"
-                      color="inherit"
-                      sx={{
-                        display: { xs: "flex" },
-                        marginLeft: "auto",
-                        fontSize: "1.2rem",
-                        fontFamily: "Bebas Neue, Arial",
-                        fontWeight: "bold",
-                        textTransform: "capitalize",
-                      }}
-                    >
+                    <Button onClick={handleCloseNavMenu} component={Link} to="/favorites" color="inherit" sx={appBarStyles.button}>
                       Favorites
                     </Button>
                   </MenuItem>
                 )}
+                <MenuItem sx={{ display: "flex", justifyContent: "center" }}>
+                  <TemperatureToggle />
+                </MenuItem>
+                <MenuItem sx={{ display: "flex", justifyContent: "center" }}>
+                  <DarkModeToggle />
+                </MenuItem>
               </Menu>
             </Box>
 
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {location.pathname !== "/favorites" && (
-                <Button
-                  component={Link}
-                  to="/favorites"
-                  color="inherit"
-                  sx={{
-                    display: { xs: "flex" },
-                    marginLeft: "auto",
-                    fontSize: "1.2rem",
-                    fontFamily: "Bebas Neue, Arial",
-                    textTransform: "capitalize",
-                    mr: "20px",
-                  }}
-                  onClick={handleCloseNavMenu}
-                >
+            {location.pathname !== "/favorites" && (
+              <Stack direction="row" spacing={1} sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "flex-end" }}>
+                <Button component={Link} to="/favorites" color="inherit" sx={appBarStyles.button} onClick={handleCloseNavMenu}>
                   Favorites
                 </Button>
-              )}
-            </Box>
-            <Box>
-              <IconButton onClick={handleToggleTheme} color="inherit" aria-label="toggle theme">
-                {darkMode ? <DarkModeIcon /> : <LightModeIcon />}
-              </IconButton>
-            </Box>
-            <TemperatureToggle />
+                <TemperatureToggle />
+                <DarkModeToggle />
+              </Stack>
+            )}
           </Toolbar>
         </Container>
       </AppBar>
     </Fade>
   );
-}
+};
+
 export default CustomAppBar;

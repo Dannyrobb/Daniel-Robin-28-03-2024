@@ -1,14 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface Favorite {
-  city: string;
-  country: string;
-  Key: string;
-}
-
-interface FavoritesState {
-  list: Favorite[];
-}
+import { Favorite, FavoritesState } from "../Interfaces/Favorites";
 
 const initialState: FavoritesState = {
   list: JSON.parse(localStorage.getItem("favorites")!) || [],
