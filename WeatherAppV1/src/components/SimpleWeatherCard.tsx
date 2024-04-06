@@ -7,7 +7,8 @@ import { unitConverter } from "../utils/helpers/helpers";
 import { Fade, Button } from "@mui/material";
 import { SimpleWeatherCardData } from "../Interfaces/Favorites";
 import { simpleWeatherCardStyle } from "../styles/styles";
-export const SimpleWeatherCard = ({ favorite }: { favorite: SimpleWeatherCardData }) => {
+
+export const SimpleWeatherCard = ({ favorite }: { favorite: SimpleWeatherCardData }): JSX.Element => {
   const unit = useAppSelector((state) => state.temperature.unit);
 
   const dispatch = useAppDispatch();

@@ -6,7 +6,16 @@ import { useAppSelector } from "../state/store";
 import { WeatherCardProps } from "../Interfaces/Temperature";
 import { FiveDayForecastDay } from "../Interfaces/Weather";
 import { weathercardStyles } from "../styles/styles";
-const WeatherCard: React.FC<WeatherCardProps> = ({ Key, city, country, temperature, fiveDayForecast, WeatherIcon, WeatherText }) => {
+
+const WeatherCard: React.FC<WeatherCardProps> = ({
+  Key,
+  city,
+  country,
+  temperature,
+  fiveDayForecast,
+  WeatherIcon,
+  WeatherText,
+}): JSX.Element => {
   const unit = useAppSelector((state) => state.temperature.unit);
 
   return (

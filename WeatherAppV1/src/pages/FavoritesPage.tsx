@@ -5,7 +5,8 @@ import NoFavoritesBox from "../components/NoFavoritesBox";
 import { useAppSelector } from "../state/store";
 import { SimpleWeatherCard } from "../components/SimpleWeatherCard";
 import { CircularProgress, Fade } from "@mui/material";
-const FavoritesPage: React.FC = () => {
+
+const FavoritesPage: React.FC = (): JSX.Element => {
   const [favoritesWeather, setFavoritesWeather] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const favorites = useAppSelector((state) => state.favorites);

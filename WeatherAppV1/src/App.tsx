@@ -6,6 +6,7 @@ import FavoritesPage from "./pages/FavoritesPage";
 import "./App.css";
 import { useSelector } from "react-redux";
 import { RootState } from "./state/store";
+
 const App: React.FC = () => {
   const darkMode = useSelector((state: RootState) => state.darkMode.darkMode);
   return (

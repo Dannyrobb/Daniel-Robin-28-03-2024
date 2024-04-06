@@ -9,7 +9,7 @@ import TemperatureToggle from "./TemperatureToggle";
 import DarkModeToggle from "./DarkMode";
 import { appBarStyles } from "../styles/styles";
 
-const CustomAppBar: React.FC = () => {
+const CustomAppBar: React.FC = (): JSX.Element => {
   const location = useLocation();
   const [animate, setAnimate] = useState(false);
   const darkMode = useSelector((state: RootState) => state.darkMode.darkMode);

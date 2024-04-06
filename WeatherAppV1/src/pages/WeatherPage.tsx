@@ -5,7 +5,7 @@ import { Typography, CircularProgress, Container } from "@mui/material";
 import WeatherCard from "../components/Weathercard";
 import { fetchWeather } from "../state/weatherSlice";
 
-const WeatherPage: React.FC = () => {
+const WeatherPage: React.FC = (): JSX.Element => {
   const weather = useAppSelector((state) => state.weather);
   const dispatch = useAppDispatch();
 
